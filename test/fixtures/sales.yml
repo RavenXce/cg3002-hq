@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  count: 1
+  price: 9.99
+  date: 2013-10-15 21:12:57
+
+two:
+  count: 1
+  price: 9.99
+  date: 2013-10-15 21:12:57
