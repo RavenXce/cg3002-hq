@@ -8,10 +8,7 @@ gem 'rails', '4.0.0'
 gem 'mysql2'
 
 # Use SCSS for stylesheets
-group :assets do
-  gem 'sass-rails', '~> 4.0.0'
-  gem 'compass-rails'
-end
+gem 'sass-rails', '~> 4.0.0'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
@@ -32,7 +29,7 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 1.2'
 
 group :doc do
-  # bundle exec rake doc:rails generates the API under doc/api.
+# bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
 end
 
