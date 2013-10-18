@@ -21,7 +21,7 @@
     // Account for jankitude on images
     > img,
     > a > img {
-      @include img-responsive;
+      @include img-responsive();
       line-height: 1;
     }
   }
@@ -183,7 +183,7 @@
 
 
 // Scale up controls for tablets and up
-@media screen and (min-width: $screen-sm) {
+@media screen and (min-width: $screen-tablet) {
 
   // Scale up the controls a smidge
   .carousel-control .icon-prev,

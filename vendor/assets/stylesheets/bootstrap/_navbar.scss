@@ -16,7 +16,7 @@
   border: 1px solid transparent;
 
   // Prevent floats from breaking the navbar
-  @include clearfix;
+  @include clearfix();
 
   @media (min-width: $grid-float-breakpoint) {
     border-radius: $navbar-border-radius;
@@ -30,7 +30,7 @@
 // styling of responsive aspects.
 
 .navbar-header {
-  @include clearfix;
+  @include clearfix();
 
   @media (min-width: $grid-float-breakpoint) {
     float: left;
@@ -55,7 +55,7 @@
   padding-left:  $navbar-padding-horizontal;
   border-top: 1px solid transparent;
   box-shadow: inset 0 1px 0 rgba(255,255,255,.1);
-  @include clearfix;
+  @include clearfix();
   -webkit-overflow-scrolling: touch;
 
   &.in {
@@ -152,7 +152,6 @@
   padding: $navbar-padding-vertical $navbar-padding-horizontal;
   font-size: $font-size-large;
   line-height: $line-height-computed;
-  max-height: $navbar-height;
   &:hover,
   &:focus {
     text-decoration: none;
@@ -204,7 +203,7 @@
 // the nav the full height of the horizontal nav (above 768px).
 
 .navbar-nav {
-  margin: ($navbar-padding-vertical / 2) -$navbar-padding-horizontal;
+  margin: ($navbar-padding-vertical / 2) (-$navbar-padding-horizontal);
 
   > li > a {
     padding-top:    10px;
@@ -260,8 +259,12 @@
 // though so that navbar contents properly stack and align in mobile.
 
 @media (min-width: $grid-float-breakpoint) {
-  .navbar-left  { float: left; }
-  .navbar-right { float: right; }
+  .navbar-left {
+    float: left !important;
+  }
+  .navbar-right {
+    float: right !important;
+  }
 }
 
 

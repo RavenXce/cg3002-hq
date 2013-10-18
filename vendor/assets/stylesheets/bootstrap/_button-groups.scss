@@ -68,7 +68,7 @@
 
 // Optional: Group multiple button groups together for a toolbar
 .btn-toolbar {
-  @include clearfix;
+  @include clearfix();
 
   .btn-group {
     float: left;
@@ -182,7 +182,7 @@
 
   // Clear floats so dropdown menus can be properly placed
   > .btn-group {
-    @include clearfix;
+    @include clearfix();
     > .btn {
       float: none;
     }

@@ -69,7 +69,7 @@ select optgroup {
 input[type="file"]:focus,
 input[type="radio"]:focus,
 input[type="checkbox"]:focus {
-  @include tab-focus;
+  @include tab-focus();
 }
 
 // Fix for Chrome number input
@@ -82,22 +82,13 @@ input[type="number"] {
   }
 }
 
-// Adjust output element
-output {
-  display: block;
-  padding-top: ($padding-base-vertical + 1);
-  font-size: $font-size-base;
-  line-height: $line-height-base;
-  color: $input-color;
-  vertical-align: middle;
-}
 
 // Placeholder
 //
 // Placeholder text gets special styles because when browsers invalidate entire
 // lines if it doesn't understand a selector/
 .form-control {
-  @include placeholder;
+  @include placeholder();
 }
 
 
@@ -133,14 +124,13 @@ output {
   color: $input-color;
   vertical-align: middle;
   background-color: $input-bg;
-  background-image: none; // Reset unusual Firefox-on-Android default style; see https://github.com/necolas/normalize.css/issues/214
   border: 1px solid $input-border;
   border-radius: $input-border-radius;
   @include box-shadow(inset 0 1px 1px rgba(0,0,0,.075));
-  @include transition(#{"border-color ease-in-out .15s, box-shadow ease-in-out .15s"});
+  @include transition(border-color ease-in-out .15s, box-shadow ease-in-out .15s);
 
   // Customize the `:focus` state to imitate native WebKit styles.
-  @include form-control-focus;
+  @include form-control-focus();
 
   // Disabled and read-only inputs
   // Note: HTML5 says that controls under a fieldset > legend:first-child won't
@@ -152,6 +142,8 @@ output {
     cursor: not-allowed;
     background-color: $input-bg-disabled;
   }
+
+  // [converter] extracted textarea& to textarea.form-control
 }
 
 // Reset height for `textarea`s
@@ -233,8 +225,10 @@ input[type="checkbox"],
 }
 
 // Form control sizing
-@include input-size(".input-sm", $input-height-small, $padding-small-vertical, $padding-small-horizontal, $font-size-small, $line-height-small, $border-radius-small);
-@include input-size(".input-lg", $input-height-large, $padding-large-vertical, $padding-large-horizontal, $font-size-large, $line-height-large, $border-radius-large);
+
+@include input-size('.input-sm', $input-height-small, $padding-small-vertical, $padding-small-horizontal, $font-size-small, $line-height-small, $border-radius-small);
+
+@include input-size('.input-lg', $input-height-large, $padding-large-vertical, $padding-large-horizontal, $font-size-large, $line-height-large, $border-radius-large);
 
 
 // Form control feedback states
@@ -294,7 +288,7 @@ input[type="checkbox"],
 .form-inline {
 
   // Kick in the inline
-  @media (min-width: $screen-sm) {
+  @media (min-width: $screen-tablet) {
     // Inline-block all the things for "inline"
     .form-group  {
       display: inline-block;
@@ -346,11 +340,11 @@ input[type="checkbox"],
 
   // Make form groups behave like rows
   .form-group {
-    @include make-row;
+    @include make-row();
   }
 
   // Only right align form labels here when the columns stop stacking
-  @media (min-width: $screen-sm) {
+  @media (min-width: $screen-tablet) {
     .control-label {
       text-align: right;
     }

@@ -37,6 +37,17 @@ textarea {
   line-height: inherit;
 }
 
+// Reset unusual Firefox-on-Android default style.
+//
+// See https://github.com/necolas/normalize.css/issues/214
+
+button,
+input,
+select[multiple],
+textarea {
+  background-image: none;
+}
+
 
 // Links
 
@@ -51,7 +62,7 @@ a {
   }
 
   &:focus {
-    @include tab-focus;
+    @include tab-focus();
   }
 }
 
@@ -64,7 +75,7 @@ img {
 
 // Responsive images (ensure images don't scale beyond their parents)
 .img-responsive {
-  @include img-responsive;
+  @include img-responsive();
 }
 
 // Rounded corners
@@ -84,7 +95,7 @@ img {
   @include transition(all .2s ease-in-out);
 
   // Keep them at most 100% wide
-  @include img-responsive($display: inline-block);
+  @include img-responsive(inline-block);
 }
 
 // Perfect circle

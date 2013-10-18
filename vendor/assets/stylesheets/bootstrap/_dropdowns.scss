@@ -112,7 +112,7 @@
     text-decoration: none;
     background-color: transparent;
     background-image: none; // Remove CSS gradient
-    @include reset-filter;
+    @include reset-filter();
     cursor: not-allowed;
   }
 }
@@ -186,7 +186,8 @@
 @media (min-width: $grid-float-breakpoint) {
   .navbar-right {
     .dropdown-menu {
-      float: right;
+      right: 0;
+      left: auto;
     }
   }
 }
