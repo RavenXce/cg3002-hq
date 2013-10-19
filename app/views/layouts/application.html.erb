@@ -59,25 +59,25 @@
 						</div>
 					</div>
 					<ul class="nav nav-list">
-						<li class="active">
+						<li<% if current_page?(:controller=>'home') || current_page?(:default)%> class="active"<%end%>>
 							<a href="home"> <i class="icon-dashboard"></i> <span class="menu-text"> Dashboard </span> </a>
 						</li>
-						<li>
+						<li<% if current_page?(:controller=>'shops')%> class="active"<%end%>>
 							<a href="shops"> <i class="icon-shopping-cart"></i> <span class="menu-text"> Shops </span> </a>
 						</li>
-						<li>
+						<li<% if current_page?(:controller=>'sales')%> class="active"<%end%>>
 							<a href="sales"> <i class="icon-usd"></i> <span class="menu-text"> Sales </span> </a>
 						</li>
-						<li>
+						<li<% if current_page?(:controller=>'deliveries')%> class="active"<%end%>>
 							<a href="deliveries"> <i class="icon-plane"></i> <span class="menu-text"> Deliveries </span> </a>
 						</li>
-						<li>
+						<li<% if current_page?(:controller=>'items')%> class="active"<%end%>>
 							<a href="items"> <i class="icon-th"></i> <span class="menu-text"> Items </span> </a>
 						</li>
 						<li>
 							<a href="calendar"> <i class="icon-calendar"></i> <span class="menu-text"> Calendar </span> </a>
 						</li>
-						<li>
+						<li<% if current_page?(:controller=>'admin')%> class="active"<%end%>>
 							<a href="admin"> <i class="icon-cog"></i> <span class="menu-text"> Admin </span> </a>
 						</li>
 					</ul>
@@ -85,39 +85,48 @@
 						<i class="icon-double-angle-left" data-icon1="icon-double-angle-left" data-icon2="icon-double-angle-right"></i>
 					</div>
 				</div>
-			</div>
-			<div class="main-content">
-				<div class="breadcrumbs breadcrumbs-fixed" id="breadcrumbs">
-					<ul class="breadcrumb">
-						<li>
-							<i class="icon-home home-icon"></i>
-							<a href="#">Home</a>
-						</li>
-						<li class="active">
-							Dashboard
-						</li>
-					</ul><!-- .breadcrumb -->
-					<div class="nav-search" id="nav-search">
-						<form class="form-search">
-							<span class="input-icon">
-								<input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off">
-								<i class="icon-search nav-search-icon"></i> </span>
-						</form>
-					</div><!-- #nav-search -->
-				</div>
-				<div class="page-content">
-					<div class="page-header">
-						<h1> Typography <small> <i class="icon-double-angle-right"></i> This is page-header (.page-header &gt; h1) </small></h1>
-					</div>
-					<div class="row">
-						<div class="col-xs-12">
-							<!-- PAGE CONTENT BEGINS -->
-							<%= yield %>
-							<!-- PAGE CONTENT ENDS -->
+				<div class="main-content">
+					<div class="breadcrumbs breadcrumbs-fixed" id="breadcrumbs">
+						<ul class="breadcrumb">
+							<li>
+								<i class="icon-home home-icon"></i>
+								<a href="#">Home</a>
+							</li>
+							<% last_breadcrumb = @breadcrumbs && @breadcrumbs.pop %>
+							<% last_breadcrumb && @breadcrumbs.each do |breadcrumb| %>
+							  <li>
+							  	<a href="<%=breadcrumb[1]%>"><%=breadcrumb[0]%></a>
+							  </li>
+							<% end %>
+							<li class="active">
+								<%=last_breadcrumb%>
+							</li>
+						</ul>
+						<div class="nav-search" id="nav-search">
+							<form class="form-search">
+								<span class="input-icon">
+									<input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off">
+									<i class="icon-search nav-search-icon"></i> </span>
+							</form>
 						</div>
 					</div>
-				</div>
+					<div class="page-content">
+						<div class="page-header">
+							<h1> <%= @page_header or "Missing header"%> <small> <i class="icon-double-angle-right"></i> <%= @page_sub_header or "Missing subheader"%> </small></h1>
+						</div>
+						<div class="row">
+							<div class="col-xs-12">
+								<!-- PAGE CONTENT BEGINS -->
+								<%= yield %>
+								<!-- PAGE CONTENT ENDS -->
+							</div>
+						</div>
+					</div>
+				</div>			
 			</div>
+			<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+				<i class="icon-double-angle-up icon-only bigger-110"></i>
+			</a>
 		</div>
 	</body>
 </html>
