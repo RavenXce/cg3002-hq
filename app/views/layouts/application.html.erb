@@ -60,22 +60,25 @@
 					</div>
 					<ul class="nav nav-list">
 						<li class="active">
-							<a href="index"> <i class="icon-dashboard"></i> <span class="menu-text"> Dashboard </span> </a>
+							<a href="home"> <i class="icon-dashboard"></i> <span class="menu-text"> Dashboard </span> </a>
 						</li>
 						<li>
-							<a href="shops"> <i class="icon-calendar"></i> <span class="menu-text"> Shops <span class="badge badge-transparent tooltip-error" title="" data-original-title="2&nbsp;Important&nbsp;Events"> <i class="icon-warning-sign red bigger-130"></i> </span> </span> </a>
+							<a href="shops"> <i class="icon-shopping-cart"></i> <span class="menu-text"> Shops </span> </a>
 						</li>
 						<li>
-							<a href="items"> <i class="icon-calendar"></i> <span class="menu-text"> Items <span class="badge badge-transparent tooltip-error" title="" data-original-title="2&nbsp;Important&nbsp;Events"> <i class="icon-warning-sign red bigger-130"></i> </span> </span> </a>
+							<a href="sales"> <i class="icon-usd"></i> <span class="menu-text"> Sales </span> </a>
 						</li>
 						<li>
-							<a href="sales"> <i class="icon-calendar"></i> <span class="menu-text"> Sales <span class="badge badge-transparent tooltip-error" title="" data-original-title="2&nbsp;Important&nbsp;Events"> <i class="icon-warning-sign red bigger-130"></i> </span> </span> </a>
+							<a href="deliveries"> <i class="icon-plane"></i> <span class="menu-text"> Deliveries </span> </a>
 						</li>
 						<li>
-							<a href="deliveries"> <i class="icon-calendar"></i> <span class="menu-text"> Deliveries <span class="badge badge-transparent tooltip-error" title="" data-original-title="2&nbsp;Important&nbsp;Events"> <i class="icon-warning-sign red bigger-130"></i> </span> </span> </a>
+							<a href="items"> <i class="icon-th"></i> <span class="menu-text"> Items </span> </a>
 						</li>
 						<li>
-							<a href="calendar"> <i class="icon-calendar"></i> <span class="menu-text"> Calendar <span class="badge badge-transparent tooltip-error" title="" data-original-title="2&nbsp;Important&nbsp;Events"> <i class="icon-warning-sign red bigger-130"></i> </span> </span> </a>
+							<a href="calendar"> <i class="icon-calendar"></i> <span class="menu-text"> Calendar </span> </a>
+						</li>
+						<li>
+							<a href="admin"> <i class="icon-cog"></i> <span class="menu-text"> Admin </span> </a>
 						</li>
 					</ul>
 					<div class="sidebar-collapse" id="sidebar-collapse">
@@ -102,7 +105,18 @@
 						</form>
 					</div><!-- #nav-search -->
 				</div>
-				<%= yield %>
+				<div class="page-content">
+					<div class="page-header">
+						<h1> Typography <small> <i class="icon-double-angle-right"></i> This is page-header (.page-header &gt; h1) </small></h1>
+					</div>
+					<div class="row">
+						<div class="col-xs-12">
+							<!-- PAGE CONTENT BEGINS -->
+							<%= yield %>
+							<!-- PAGE CONTENT ENDS -->
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</body>
