@@ -1,6 +1,8 @@
 jQuery(function($) {
-  $('textarea.autosize-transition').autosize();
-  $('#reset-inv-add').on('click', function() {
-  	$('#form-field-inv-add').val("").trigger('autosize.resize');	
-  });
+	$('#reset-inv-add').on('click', function() {
+		$('#form-field-inv-add').val("").trigger('autosize.resize');
+	});
 });
+$(document).on('page:load', function() {
+	$('textarea.autosize-transition').autosize();
+}); 

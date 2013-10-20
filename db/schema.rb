@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131018200245) do
+ActiveRecord::Schema.define(version: 20131020123854) do
 
   create_table "hq_deliveries", force: true do |t|
     t.integer  "supplier_id"
@@ -34,14 +34,16 @@ ActiveRecord::Schema.define(version: 20131018200245) do
   add_index "hq_delivery_items", ["item_id"], name: "index_hq_delivery_items_on_item_id", using: :btree
 
   create_table "items", force: true do |t|
-    t.integer  "barcode",      limit: 1
+    t.integer  "barcode"
     t.string   "product_name"
     t.string   "category"
     t.string   "manufacturer"
-    t.decimal  "cost_price",             precision: 10, scale: 0
+    t.decimal  "cost_price",   precision: 10, scale: 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "items", ["barcode"], name: "index_items_on_barcode", unique: true, using: :btree
 
   create_table "sales", force: true do |t|
     t.decimal  "price",      precision: 10, scale: 0
@@ -87,7 +89,7 @@ ActiveRecord::Schema.define(version: 20131018200245) do
   add_index "shop_items", ["shop_id"], name: "index_shop_items_on_shop_id", using: :btree
 
   create_table "shops", force: true do |t|
-    t.integer  "s_id",          limit: 1
+    t.integer  "s_id"
     t.string   "country"
     t.string   "city"
     t.string   "address"
@@ -96,6 +98,8 @@ ActiveRecord::Schema.define(version: 20131018200245) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "shops", ["s_id"], name: "index_shops_on_s_id", unique: true, using: :btree
 
   create_table "suppliers", force: true do |t|
     t.string   "name"
