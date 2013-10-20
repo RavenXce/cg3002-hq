@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  current_stock: 1
+  item_id: 
+
+two:
+  current_stock: 1
+  item_id: 

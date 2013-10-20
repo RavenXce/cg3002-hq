@@ -1,0 +1,66 @@
+<%
+ @page_header = "Products"
+  @page_sub_header = "overview"
+  @breadcrumbs = ["Products"]
+%>
+<div class="row">
+	<div class="col-xs-12">
+		<h3 class="header smaller lighter blue">All Products</h3>
+		<div class="table-header">
+			Product Listing
+		</div>
+		<div class="table-responsive">
+			<table id="all-products-table" class="table table-striped table-bordered table-hover">
+				<thead>
+					<tr>
+						<th class="center sorting_disabled"><label>
+							<input type="checkbox" class="ace" />
+							<span class="lbl"></span></label></th>
+						<th>Name</th>
+						<th class="hidden-480">Manufacturer</th>
+						<th>Price</th>
+						<th><i class="icon-time bigger-110 hidden-480"></i> Update</th>
+						<th class="sorting_disabled"></th>
+					</tr>
+				</thead>
+				<tbody>
+					<% @items.each do |item| %>
+					<tr>
+						<td class='center'><label>
+							<input type='checkbox' class="ace" />
+							<span class="lbl"></span></label></td>
+						<td><a href='#'><%= item.product_name%></a></td>
+						<td class='hidden-480'><%= item.manufacturer%></td>
+						<td><%= '$' + "%0.2f" % item.cost_price%></td>
+						<td class='hidden-480'><%= item.updated_at%></td>
+						<td>
+						<div class='visible-md visible-lg hidden-sm hidden-xs action-buttons'>
+							<a class="blue" href="#"><i class="icon-zoom-in bigger-130"></i></a>
+							<a class="green" href="#"><i class="icon-pencil bigger-130"></i></a>
+							<a class="red" href="#"><i class="icon-trash bigger-130"></i></a>
+						</div>
+						<div class='visible-xs visible-sm hidden-md hidden-lg'>
+							<div class="inline position-relative">
+								<button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown">
+									<i class="icon-caret-down icon-only bigger-120"></i>
+								</button>
+								<ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
+									<li>
+										<a href="#" class="tooltip-info" data-rel="tooltip" title="View"><span class="blue"><i class="icon-zoom-in bigger-120"></i></span></a>
+									</li>
+									<li>
+										<a href="#" class="tooltip-success" data-rel="tooltip" title="Edit"><span class="green"><i class="icon-edit bigger-120"></i></span></a>
+									</li>
+									<li>
+										<a href="#" class="tooltip-error" data-rel="tooltip" title="Delete"><span class="red"><i class="icon-trash bigger-120"></i></span> </a>
+									</li>
+								</ul>
+							</div>
+						</div></td>
+					</tr>
+					<% end %>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>

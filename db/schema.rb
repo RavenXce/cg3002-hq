@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131020123854) do
+ActiveRecord::Schema.define(version: 20131020144653) do
 
   create_table "hq_deliveries", force: true do |t|
     t.integer  "supplier_id"
@@ -33,20 +33,30 @@ ActiveRecord::Schema.define(version: 20131020123854) do
   add_index "hq_delivery_items", ["hq_delivery_id"], name: "index_hq_delivery_items_on_hq_delivery_id", using: :btree
   add_index "hq_delivery_items", ["item_id"], name: "index_hq_delivery_items_on_item_id", using: :btree
 
+  create_table "hq_items", force: true do |t|
+    t.integer  "current_stock"
+    t.integer  "item_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "hq_items", ["item_id"], name: "index_hq_items_on_item_id", using: :btree
+
   create_table "items", force: true do |t|
     t.integer  "barcode"
     t.string   "product_name"
     t.string   "category"
     t.string   "manufacturer"
-    t.decimal  "cost_price",   precision: 10, scale: 0
+    t.decimal  "cost_price",   precision: 10, scale: 2
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "bundle_unit"
   end
 
   add_index "items", ["barcode"], name: "index_items_on_barcode", unique: true, using: :btree
 
   create_table "sales", force: true do |t|
-    t.decimal  "price",      precision: 10, scale: 0
+    t.decimal  "price",      precision: 10, scale: 2
     t.datetime "date"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -80,7 +90,7 @@ ActiveRecord::Schema.define(version: 20131020123854) do
     t.integer  "shop_id"
     t.integer  "item_id"
     t.integer  "current_stock"
-    t.decimal  "selling_price", precision: 10, scale: 0
+    t.decimal  "selling_price", precision: 10, scale: 2
     t.datetime "created_at"
     t.datetime "updated_at"
   end
