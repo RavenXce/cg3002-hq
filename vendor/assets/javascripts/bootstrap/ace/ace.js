@@ -4,8 +4,7 @@ jQuery(function($) {
 	window['ace'].click_event = $.fn.tap ? "tap" : "click";
 });
 
-$(document).on('page:change', function() {
-	//ace.click_event defined in ace-elements.js
+jQuery(function($) {
 	ace.handle_side_menu(jQuery);
 
 	ace.enable_search_ahead(jQuery);	
@@ -25,6 +24,10 @@ $(document).on('page:change', function() {
 		size : '6px'
 	});
 	*/
+});
+
+$(document).on('page:load', function() {
+	ace.handle_side_menu(jQuery);
 });
 
 

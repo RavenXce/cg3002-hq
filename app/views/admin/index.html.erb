@@ -1,5 +1,50 @@
 <%
-@page_header = "Admin"
-@page_sub_header = "danger area"
-@breadcrumbs = ["Admin"]
-%> 
+ @page_header = "Admin"
+  @page_sub_header = "danger area"
+  @breadcrumbs = ["Admin"]
+%>
+<div class="col-xs-12">
+	<div class="alert alert-danger">
+		<button type="button" class="close" data-dismiss="alert">
+			<i class="icon-remove"></i>
+		</button>
+		<strong> <i class="icon-remove"></i> Warning! </strong> 
+		<br>
+		Stuff below this line may Break Things Beyond Repair&#153;. 
+		<br>
+		Proceed at your own peril.
+	</div>
+</div>
+<div class="col-xs-12">
+	<div class="widget-box">
+		<div class="widget-header">
+			<h4>Inventory Dump</h4>
+			<div class="widget-toolbar">
+				<a href="#" data-action="collapse"> <i class="icon-chevron-up"></i> </a>
+			</div>
+		</div>
+		<div class="widget-body">
+			<div class="widget-main no-padding">
+				<form action="items/admin_dump" method="post">
+					<!-- <legend>Form</legend> -->
+					<%= tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token) %> 
+					<fieldset>
+						<label for="form-field-inv-add">Add Items</label>
+						<textarea name="items" id="form-field-inv-add" class="autosize-transition form-control"></textarea>
+					</fieldset>
+					<div class="form-actions center">
+						<button type="submit" class="btn btn-sm btn-success">
+							Submit
+							<i class="icon-arrow-right icon-on-right bigger-110"></i>
+						</button>
+						&nbsp; &nbsp; &nbsp;
+						<button class="btn btn-sm" type="reset" id="reset-inv-add">
+							<i class="icon-undo bigger-110"></i>
+							Reset
+						</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>

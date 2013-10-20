@@ -1,4 +1,5 @@
 HqServer::Application.routes.draw do
+  post 'items/admin_dump', to: 'items#admin_dump'
   resources :home
   resources :admin
   resources :items, :path => 'products'
