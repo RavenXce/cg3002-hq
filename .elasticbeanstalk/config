@@ -1,0 +1,12 @@
+[global]
+ApplicationName=cg3002-hq
+DevToolsEndpoint=git.elasticbeanstalk.ap-southeast-1.amazonaws.com
+EnvironmentName=cg3002-hq-env
+EnvironmentType=SingleInstance
+InstanceProfileName=aws-elasticbeanstalk-ec2-role
+OptionSettingFile=C:\Users\RavenXce\Documents\GitHub\cg3002-hq\.elasticbeanstalk\optionsettings.cg3002-hq-env
+RdsEnabled=No
+Region=ap-southeast-1
+ServiceEndpoint=https://elasticbeanstalk.ap-southeast-1.amazonaws.com
+SolutionStack=64bit Amazon Linux running Ruby 1.9.3
+
