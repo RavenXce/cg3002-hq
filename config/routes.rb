@@ -1,8 +1,8 @@
 HqServer::Application.routes.draw do
   resources :home
   resources :admin
-  resources :items
-  resources :shops
+  resources :items, :path => 'products'
+  resources :shops, :path => 'stores'
   resources :sales
   resources :deliveries
   root 'home#index', as: :default
