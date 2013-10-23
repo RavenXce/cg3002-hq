@@ -21,5 +21,6 @@ module HqServer
     # config.i18n.default_locale = :de
     config.assets.enabled = true
     config.assets.paths << "#{Rails.root}/vendor/assets/fonts"
+    config.time_zone = 'UTC'
   end
 end
