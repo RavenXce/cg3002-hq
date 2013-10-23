@@ -1,4 +1,5 @@
 $(document).on('ready  page:load', function() {
+	var allShopsTable = $('#all-shops-table').delay(50).dataTable();
 	$(".chosen-select").chosen({
 		width : '80%'
 	});
@@ -41,17 +42,15 @@ $(document).on('ready  page:load', function() {
 	});
 	$('.delete-shop').on('click', function(e) {
 		e.preventDefault();
-		$table = $('#all-products-table');
 		$row = $(this).parents('tr');
+		console.log('stores/' + $row.find('.id').html().trim());
 		$.ajax({
-			type : 'POST',
-			url : 'stores/delete',
+			type : 'DELETE',
+			url : 'stores/' + $row.find('.id').html().trim(),
 			parameters : {
-				s_id: $row.find('.s_id').val(),
 				authenticity_token: AUTH_TOKEN
 			},
 			success : function(result) {
-				$table.fnDeleteRow($row);
 			},
 			error : function(jqXHR, status, error) {
 				alert('error!');

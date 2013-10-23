@@ -9,8 +9,8 @@ class ShopsController < ApplicationController
     redirect_to '/stores'
   end
   
-  def delete
-    shop = Shop.find_by_s_id(params[:s_id])
+  def destroy
+    shop = Shop.find(params[:id])
     shop.delete #TODO: do a soft delete instead
   end
   

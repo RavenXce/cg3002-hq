@@ -85,9 +85,10 @@
 			Store Listing
 		</div>
 		<div class="table-responsive">
-			<table id="all-products-table" class="table table-striped table-bordered table-hover">
+			<table id="all-shops-table" class="table table-striped table-bordered table-hover">
 				<thead>
 					<tr>
+						<th class="hidden sorting_disabled"></th>
 						<th class="center sorting_disabled"><label>
 							<input type="checkbox" class="ace" />
 							<span class="lbl"></span></label></th>
@@ -103,12 +104,13 @@
 				<tbody>
 					<% @shops.each do |shop| %>
 					<tr>
+						<td class="hidden id"><%= shop.id %></input>
 						<td class='center'><label>
 							<input type='checkbox' class="ace" />
 							<span class="lbl"></span></label></td>
-						<td><a href='#' class="s_id"><%= "%05d" % shop.s_id%></a></td>
+						<td><a href='#'><%= "%05d" % shop.s_id%></a></td>
 						<td class='hidden-480'><a href='#'><%= shop.country%></a></td>
-						<td><a href='#'><%= shop.s_id%></a></td>
+						<td><a href='#'><%= shop.city%></a></td>
 						<td class='hidden-480'><a href='#'><%= shop.address%></a></td>
 						<td><a href='#'><%= shop.postal_code%></a></td>
 						<td class='hidden-480'><%= shop.delivery_time%></td>
@@ -116,7 +118,7 @@
 						<div class='visible-md visible-lg hidden-sm hidden-xs action-buttons'>
 							<a class="blue" href="#"><i class="icon-zoom-in bigger-130"></i></a>
 							<a class="green" href="#"><i class="icon-pencil bigger-130"></i></a>
-							<a class="red" href="#" class="delete-shop"><i class="icon-trash bigger-130"></i></a>
+							<a class="red delete-shop" href="#"><i class="icon-trash bigger-130"></i></a>
 						</div>
 						<div class='visible-xs visible-sm hidden-md hidden-lg'>
 							<div class="inline position-relative">
