@@ -59,27 +59,47 @@
 						</div>
 					</div>
 					<ul class="nav nav-list">
-						<li<% if current_page?(:controller=>'home') || current_page?(:default)%>
-							class="active"<%end%>> <a href="<%=home_index_path%>"> <i class="icon-dashboard"></i> <span class="menu-text"> Dashboard </span> </a>
-							</li>
-							<li<% if current_page?(:controller=>'shops')%>
-								class="active"<%end%>> <a href="<%=shops_path%>"> <i class="icon-shopping-cart"></i> <span class="menu-text"> Stores </span> </a>
+						<li
+						<% if current_page?(:controller=>'home') || current_page?(:default)%>
+							class="active"<%end%>>
+							<a href="<%= home_index_path%>"> <i class="icon-dashboard"></i> <span class="menu-text"> Dashboard </span> </a>
+						</li>
+						<li
+						<% if current_page?(:controller=>'shops') %>
+							class="active"<%end%>>
+							<a href="<%= shops_path%>"> <i class="icon-shopping-cart"></i> <span class="menu-text"> Stores </span> </a>
+						</li>
+						<li
+						<% if current_page?(:controller=>'sales') %>
+							class="active"<%end%>>
+							<a href="#" class="dropdown-toggle"> <i class="icon-usd"></i> <span class="menu-text"> Sales </span> <b class="arrow icon-angle-down"></b> </a>
+							<ul class="submenu">
+								<li>
+									<a href="<%= sales_path%>"> <i class="icon-double-angle-right"></i> Overview </a>
 								</li>
-								<li<% if current_page?(:controller=>'sales')%>
-									class="active"<%end%>> <a href="<%=sales_path%>"> <i class="icon-usd"></i> <span class="menu-text"> Sales </span> </a>
-									</li>
-									<li<% if current_page?(:controller=>'deliveries')%>
-										class="active"<%end%>> <a href="<%=deliveries_path%>"> <i class="icon-plane"></i> <span class="menu-text"> Deliveries </span> </a>
-										</li>
-										<li<% if current_page?(:controller=>'items')%>
-											class="active"<%end%>> <a href="<%=items_path%>"> <i class="icon-th"></i> <span class="menu-text"> Products </span> </a>
-											</li>
-											<li>
-												<a href="calendar"> <i class="icon-calendar"></i> <span class="menu-text"> Calendar </span> </a>
-											</li>
-											<li<% if current_page?(:controller=>'admin')%>
-												class="active"<%end%>> <a href="<%=admin_index_path%>"> <i class="icon-cog"></i> <span class="menu-text"> Admin </span> </a>
-												</li>
+								<li>
+									<a href="<%= sales_all_path%>"> <i class="icon-double-angle-right"></i> All Stores </a>
+								</li>
+								<li>
+									<a href="sales/store"> <i class="icon-double-angle-right"></i> Statistics &amp; Analysis</a>
+								</li>
+							</ul>
+						</li>
+						<li
+						<% if current_page?(:controller=>'deliveries') %>
+							class="active"<%end%>> <a href="<%= deliveries_path%>"> <i class="icon-plane"></i> <span class="menu-text"> Deliveries </span> </a>
+						</li>
+						<li
+						<% if current_page?(:controller=>'items') %>
+							class="active"<%end%>> <a href="<%= items_path%>"> <i class="icon-th"></i> <span class="menu-text"> Products </span> </a>
+						</li>
+						<li>
+							<a href="calendar"> <i class="icon-calendar"></i> <span class="menu-text"> Calendar </span> </a>
+						</li>
+						<li
+						<% if current_page?(:controller=>'admin')%>
+							class="active"<%end%>> <a href="<%= admin_index_path%>"> <i class="icon-cog"></i> <span class="menu-text"> Admin </span> </a>
+						</li>
 					</ul>
 					<div class="sidebar-collapse" id="sidebar-collapse">
 						<i class="icon-double-angle-left" data-icon1="icon-double-angle-left" data-icon2="icon-double-angle-right"></i>
@@ -134,11 +154,11 @@
 			<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse"> <i class="icon-double-angle-up icon-only bigger-110"></i> </a>
 			<% if defined? @errors %>
 			<script>
-				$.gritter.add({
-					title : 'Error',
-					text : '<%= @errors%>',
-					class_name : 'gritter-error'
-				});
+			$.gritter.add({
+				title : 'Error',
+				text : '<%= @errors%>',
+				class_name : 'gritter-error'
+			});
 			</script>
 			<% end %>
 		</div>
