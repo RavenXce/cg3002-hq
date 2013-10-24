@@ -1,4 +1,5 @@
 /*
  *=require_tree ./bootstrap
- *=require_tree ./ace 
+ *=require_tree ./defaults
+ *=require_tree ./ace
  */

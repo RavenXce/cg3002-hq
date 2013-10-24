@@ -7,21 +7,18 @@ class ShopsController < ApplicationController
     shop = Shop.new(create_params)
     begin
       shop.save!
-    rescue Exception => e
-      query_string = {:errors => e.message}
+    rescue => e
+      @errors = e.message
     end
-    if query_string[:errors]
-      redirect_to '/stores&' + query_string.to_query
-      return
-    end
-    redirect_to '/stores'
+    @shops = Shop.all
+    render 'index'
   end
   
   def destroy
     shop = Shop.find(params[:id])
     begin
       shop.delete #TODO: do a soft delete instead
-    rescue Exception => e
+    rescue => e
       render :json => {:success => false, :errors => [e.message]}, :status => 422
     end
       render :json => {:success => true}, :status => 200
