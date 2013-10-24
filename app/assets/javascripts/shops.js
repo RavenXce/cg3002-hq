@@ -18,7 +18,7 @@ $(document).on('ready  page:load', function() {
 		no_icon : 'icon-cloud-upload',
 		droppable : true,
 		thumbnail : 'small'//large | fit
-		//, icon_remove:null//set null, to hide remove/reset button
+		//,    icon_remove:null//set null, to hide remove/reset button
 		/**,before_change:function(files, dropped) {
 		 //Check an example below
 		 //or examples/file-upload.html
@@ -40,20 +40,37 @@ $(document).on('ready  page:load', function() {
 		//console.log($(this).data('ace_input_files'));
 		//console.log($(this).data('ace_input_method'));
 	});
-	$('.delete-shop').on('click', function(e) {
+	$('.delete-shop').on(ace.click_event, function(e) {
 		e.preventDefault();
 		$row = $(this).parents('tr');
-		console.log('stores/' + $row.find('.id').html().trim());
-		$.ajax({
-			type : 'DELETE',
-			url : 'stores/' + $row.find('.id').html().trim(),
-			parameters : {
-				authenticity_token: AUTH_TOKEN
-			},
-			success : function(result) {
-			},
-			error : function(jqXHR, status, error) {
-				alert('error!');
+		$spinner = $row.find('i.icon-spinner');
+		bootbox.dialog({
+			message : "<span class='bigger-110'>Really delete forever?</span>",
+			buttons : {
+				"button" : {
+					"label" : "Cancel",
+					"className" : "btn-sm"
+				},
+				"delete" : {
+					"label" : "Delete!",
+					"className" : "btn-sm btn-danger",
+					"callback" : function() {
+						$spinner.removeClass('hidden');
+						$.ajax({
+							type : 'DELETE',
+							url : 'stores/' + $row.find('.id').html().trim(),
+							data : {
+								authenticity_token : AUTH_TOKEN
+							},
+							success : function(result) {
+								$spinner.addClass('hidden');
+								allShopsTable.fnDeleteRow(0); // XXX: get proper index!
+							},
+							error : function(jqXHR, status, error) {
+							}
+						});
+					}
+				}
 			}
 		});
 	});

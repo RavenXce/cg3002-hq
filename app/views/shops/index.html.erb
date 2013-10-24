@@ -104,8 +104,7 @@
 				<tbody>
 					<% @shops.each do |shop| %>
 					<tr>
-						<td class="hidden id"><%= shop.id %></input>
-						<td class='center'><label>
+						<td class="hidden id"><%= shop.id %></input> <td class='center'><label>
 							<input type='checkbox' class="ace" />
 							<span class="lbl"></span></label></td>
 						<td><a href='#'><%= "%05d" % shop.s_id%></a></td>
@@ -119,6 +118,7 @@
 							<a class="blue" href="#"><i class="icon-zoom-in bigger-130"></i></a>
 							<a class="green" href="#"><i class="icon-pencil bigger-130"></i></a>
 							<a class="red delete-shop" href="#"><i class="icon-trash bigger-130"></i></a>
+							<a><i class="hidden icon-spinner icon-spin orange bigger-130"></i></a>
 						</div>
 						<div class='visible-xs visible-sm hidden-md hidden-lg'>
 							<div class="inline position-relative">
