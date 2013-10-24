@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131023151824) do
+ActiveRecord::Schema.define(version: 20131024120502) do
 
   create_table "hq_deliveries", force: true do |t|
     t.integer  "supplier_id"
@@ -63,8 +63,10 @@ ActiveRecord::Schema.define(version: 20131023151824) do
     t.datetime "updated_at"
     t.integer  "count"
     t.integer  "shop_id"
+    t.integer  "item_id"
   end
 
+  add_index "sales", ["item_id"], name: "index_sales_on_item_id", using: :btree
   add_index "sales", ["shop_id"], name: "index_sales_on_shop_id", using: :btree
 
   create_table "shop_deliveries", force: true do |t|

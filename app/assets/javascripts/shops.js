@@ -1,9 +1,23 @@
 $(document).on('ready  page:load', function() {
-	var allShopsTable = $('#all-shops-table').delay(50).dataTable();
-	$(".chosen-select").chosen({
-		width : '80%'
+	var allShopsTable = $('#all-shops-table').dataTable();
+	$('.edit-shop').on(ace.click_event, function() {
+		//XXX: get data from server!
+		$row = $(this).parents('tr');
+		$form = $('#form-edit-shop');
+		$form.attr('action', 'stores/'+$row.data('id'));
+		$('#form-field-id-edit').val($row.find('span.s_id').html().trim());
+		$('#form-field-address-edit').val($row.find('span.address').html().trim());
+		$('#form-field-city-edit').val($row.find('span.city').html().trim());
+		$('#form-field-postal-code-edit').val($row.find('span.postal_code').html().trim());		
+		$('#delivery-timepicker-edit').val($row.find('span.delivery_time').html().trim());
+		$chosenSelect = $form.find('.chosen-select');
+		$chosenSelect.val($row.find('span.country').html().trim());
+		$chosenSelect.trigger("chosen:updated");
 	});
-	$('#delivery-timepicker').timepicker({
+	$(".chosen-select").chosen({
+		width : '90%'
+	});
+	$('.delivery-timepicker').timepicker({
 		minuteStep : 1,
 		showSeconds : false,
 		showMeridian : false,
@@ -47,10 +61,6 @@ $(document).on('ready  page:load', function() {
 		bootbox.dialog({
 			message : "<span class='bigger-110'>Really delete forever?</span>",
 			buttons : {
-				"button" : {
-					"label" : "Cancel",
-					"className" : "btn-sm"
-				},
 				"delete" : {
 					"label" : "Delete!",
 					"className" : "btn-sm btn-danger",
@@ -58,18 +68,22 @@ $(document).on('ready  page:load', function() {
 						$spinner.removeClass('hidden');
 						$.ajax({
 							type : 'DELETE',
-							url : 'stores/' + $row.find('.id').html().trim(),
+							url : 'stores/' + $row.data('id'),
 							data : {
 								authenticity_token : AUTH_TOKEN
 							},
 							success : function(result) {
 								$spinner.addClass('hidden');
-								allShopsTable.fnDeleteRow(0); // XXX: get proper index!
+								allShopsTable.fnDeleteRow($('#all-shops-table').children().index($row)); // XXX: get proper index!
 							},
 							error : function(jqXHR, status, error) {
 							}
 						});
 					}
+				},				
+				"button" : {
+					"label" : "Cancel",
+					"className" : "btn-sm"
 				}
 			}
 		});

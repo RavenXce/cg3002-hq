@@ -5,4 +5,4 @@ jQuery(function($) {
 });
 $(document).on('page:load', function() {
 	$('textarea.autosize-transition').autosize();
-}); 
+});

@@ -4,13 +4,17 @@ class ShopsController < ApplicationController
   end
   
   def create
-    shop = Shop.new(create_params)
-    begin
-      shop.save!
-    rescue => e
-      @errors = e.message
+    if !Shop.where(:s_id => params[:s_id]).empty? then
+      @errors = "Duplicate entry! A shop with the same ID already exists."
+    else    
+      shop = Shop.new(create_params)    
+      begin
+        shop.save!
+      rescue => e
+        @errors = e.message
+      end
     end
-    @shops = Shop.all
+    @shops = Shop.all      
     render 'index'
   end
   
@@ -24,9 +28,19 @@ class ShopsController < ApplicationController
       render :json => {:success => true}, :status => 200
   end
   
+  def update
+    shop = Shop.find(params[:id])
+    shop.update(edit_params)
+    redirect_to '/home#index'
+  end
+  
   private
   
   def create_params
     params.permit(:s_id, :country, :city, :address, :postal_code, :delivery_time)
+  end
+  
+  def edit_params
+    params.permit(:country, :city, :address, :postal_code, :delivery_time)
   end
 end

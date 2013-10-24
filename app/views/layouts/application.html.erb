@@ -135,10 +135,11 @@
 			<% if defined? @errors %>
 			<script>
 				$.gritter.add({
-					title : 'Error',
-					text : '<%=@errors%>',
-					class_name : 'gritter-error'
-				});
+title : 'Error',
+text : '<%= @errors%>
+	',
+	class_name : 'gritter-error'
+	});
 			</script>
 			<% end %>
 		</div>

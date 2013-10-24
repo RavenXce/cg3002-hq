@@ -1,4 +1,5 @@
 class Item < ActiveRecord::Base
+  has_many :sales
   has_many :hq_items
   has_many :shop_items
   has_many :shops, through: :shop_items
