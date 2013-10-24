@@ -6,6 +6,7 @@ $(document).on('ready  page:load', function() {
 	$(".chosen-select").chosen({
 		width : '90%'
 	});
+	$(".numeric-only").ForceNumericOnly();
 	$('.delivery-timepicker').timepicker({
 		minuteStep : 1,
 		showSeconds : false,

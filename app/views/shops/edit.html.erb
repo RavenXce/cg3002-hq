@@ -18,7 +18,7 @@
 								<div class="form-group">
 									<label for="form-field-id">Shop ID</label>
 									<div>
-										<input readonly name="s_id" class="input-small" type="text" id="form-field-id-edit" placeholder="" value="<%= @shop.s_id%>" />
+										<input readonly name="s_id" class="input-small numeric-only" type="text" id="form-field-id-edit" placeholder="" value="<%= @shop.s_id%>" />
 									</div>
 								</div>
 							</div>
@@ -48,7 +48,7 @@
 							<div class="space-4"></div>
 							<div class="form-inline">
 								<input name="city" class="input-medium" type="text" id="form-field-city-edit" placeholder="City" value="<%= @shop.city%>" />
-								<input name="postal_code" class="input-small" type="text" id="form-field-postal-code-edit" placeholder="Postal Code" value="<%= @shop.postal_code%>" />
+								<input name="postal_code" class="input-small numeric-only" type="text" id="form-field-postal-code-edit" placeholder="Postal Code" value="<%= @shop.postal_code%>" />
 							</div>
 						</div>
 					</div>
@@ -66,6 +66,7 @@
 	</div>
 </form>
 <script>
+	$(".numeric-only").ForceNumericOnly();
 	$(".chosen-select").chosen({
 		width : '90%'
 	});
@@ -76,6 +77,6 @@
 		defaultTime : '00:00AM'
 	}).next().on(ace.click_event, function() {
 		$(this).prev().focus();
-	}); 
+	});
 </script>
 <!-- END MODAL FORM EDIT -->
