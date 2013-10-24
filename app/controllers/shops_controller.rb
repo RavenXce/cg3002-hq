@@ -1,4 +1,5 @@
 class ShopsController < ApplicationController
+  layout false, :only => [:edit]
   def index
     @shops = Shop.all
   end
@@ -26,6 +27,11 @@ class ShopsController < ApplicationController
       render :json => {:success => false, :errors => [e.message]}, :status => 422
     end
       render :json => {:success => true}, :status => 200
+  end
+  
+  def edit
+    @shop = Shop.find(params[:id])
+    render :edit
   end
   
   def update

@@ -1,0 +1,81 @@
+<!-- START MODAL FORM EDIT -->
+<form id="form-edit-shop" action="" method="post">
+	<%= form_tag('/stores', method: "patch")%>
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">
+					&times;
+				</button>
+				<h4 class="blue bigger">Update Shop Data</h4>
+			</div>
+			<div class="modal-body overflow-visible">
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="space-4"></div>
+						<div class="row">
+							<div class="col-xs-12 col-sm-2">
+								<div class="form-group">
+									<label for="form-field-id">Shop ID</label>
+									<div>
+										<input readonly name="s_id" class="input-small" type="text" id="form-field-id-edit" placeholder="" value="<%= @shop.s_id%>" />
+									</div>
+								</div>
+							</div>
+							<div class="col-xs-12 col-sm-6">
+								<label for="delivery-timepicker-edit">Delivery Time</label>
+								<div class="input-group bootstrap-timepicker">
+									<input name="delivery_time" id="delivery-timepicker-edit" type="text" class="form-control delivery-timepicker" />
+									<span class="input-group-addon"> <i class="icon-time bigger-110"></i> </span>
+								</div>
+							</div>
+						</div>
+						<div class="space-4"></div>
+						<div class="form-group">
+							<label for="form-field-country-edit">Country</label>
+							<div>
+								<select name="country" class="chosen-select" data-placeholder="Choose a Country...">
+									<%= country_options_for_select(@shop.country, ['Singapore', 'United States'])%>
+								</select>
+							</div>
+						</div>
+						<div class="space-4"></div>
+						<div class="form-group">
+							<label for="form-field-address-edit">Address</label>
+							<div>
+								<input name="address" class="input-xxlarge" type="text" id="form-field-address-edit" placeholder="Street" value="<%= @shop.address%>" />
+							</div>
+							<div class="space-4"></div>
+							<div class="form-inline">
+								<input name="city" class="input-medium" type="text" id="form-field-city-edit" placeholder="City" value="<%= @shop.city%>" />
+								<input name="postal_code" class="input-small" type="text" id="form-field-postal-code-edit" placeholder="Postal Code" value="<%= @shop.postal_code%>" />
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button class="btn btn-sm" data-dismiss="modal">
+					<i class="icon-remove"></i> Cancel
+				</button>
+				<button class="btn btn-sm btn-primary" type="submit">
+					<i class="icon-ok"></i> Save
+				</button>
+			</div>
+		</div>
+	</div>
+</form>
+<script>
+	$(".chosen-select").chosen({
+		width : '90%'
+	});
+	$('.delivery-timepicker').timepicker({
+		minuteStep : 1,
+		showSeconds : false,
+		showMeridian : false,
+		defaultTime : '00:00AM'
+	}).next().on(ace.click_event, function() {
+		$(this).prev().focus();
+	}); 
+</script>
+<!-- END MODAL FORM EDIT -->
