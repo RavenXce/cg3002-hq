@@ -63,8 +63,7 @@ $(document).on('ready  page:load', function() {
 							},
 							success : function(result) {
 								$spinner.addClass('hidden');
-								console.log($('#all-shops-table').children().index($row));
-								allShopsTable.fnDeleteRow($('#all-shops-table').children().index($row)); // XXX: get proper index!
+								allShopsTable.fnDeleteRow($('#all-shops-table').children('tbody').children().index($row));
 							},
 							error : function(jqXHR, status, error) {
 							}

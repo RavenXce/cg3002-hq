@@ -1,5 +1,5 @@
 <!-- START MODAL FORM EDIT -->
-<form id="form-edit-shop" action="" method="post">
+<form id="form-edit-shop" action="/stores/<%=@shop.id%>" method="post">
 	<%= form_tag('/stores', method: "patch")%>
 	<div class="modal-dialog">
 		<div class="modal-content">

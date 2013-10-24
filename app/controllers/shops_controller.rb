@@ -16,7 +16,7 @@ class ShopsController < ApplicationController
       end
     end
     @shops = Shop.all      
-    render 'index'
+    render :index
   end
   
   def destroy
@@ -37,7 +37,8 @@ class ShopsController < ApplicationController
   def update
     shop = Shop.find(params[:id])
     shop.update(edit_params)
-    redirect_to '/home#index'
+    @shops = Shop.all
+    render :index
   end
   
   private
