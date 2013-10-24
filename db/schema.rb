@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131024120502) do
+ActiveRecord::Schema.define(version: 20131024174804) do
 
   create_table "hq_deliveries", force: true do |t|
     t.integer  "supplier_id"
@@ -106,7 +106,7 @@ ActiveRecord::Schema.define(version: 20131024120502) do
     t.string   "country"
     t.string   "city"
     t.string   "address"
-    t.string   "postal_code"
+    t.integer  "postal_code"
     t.datetime "delivery_time"
     t.datetime "created_at"
     t.datetime "updated_at"
