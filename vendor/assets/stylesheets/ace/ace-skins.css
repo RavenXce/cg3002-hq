@@ -968,8 +968,7 @@ body.skin-2 .main-content{
 
 
 .skin-3 .nav-list  li.active > a:before {/*the blue one under the white one!*/
- /*content:"";*/ /*disabled!*/
- display:block;
+ content:""; display:block;
  position:absolute;
  right:0; top:0;  z-index:11;   /**/ left:auto; bottom:auto; width:auto; max-width:auto; background-color:transparent;
  border-style:solid;

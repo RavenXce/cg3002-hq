@@ -1,5 +1,7 @@
 /*
  *=require_tree ./bootstrap
  *=require_tree ./defaults
- *=require_tree ./ace
+ *=require ./ace/ace
+ *=require ./ace/ace-skins
+ *=require ./ace/ace-fonts 
  */

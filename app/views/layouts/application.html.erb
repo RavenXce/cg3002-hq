@@ -35,84 +35,86 @@
 		<div class="main-container container" id="main-container">
 			<div class="main-container-inner">
 				<a class="menu-toggler" id="menu-toggler" href="#"> <span class="menu-text"></span> </a>
-				<div class="sidebar sidebar-fixed skin-3" id="sidebar">
-					<div class="sidebar-shortcuts" id="sidebar-shortcuts">
-						<div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
-							<button class="btn btn-success">
-								<i class="icon-signal"></i>
-							</button>
-							<button class="btn btn-info">
-								<i class="icon-pencil"></i>
-							</button>
-							<button class="btn btn-warning">
-								<i class="icon-group"></i>
-							</button>
-							<button class="btn btn-danger">
-								<i class="icon-cogs"></i>
-							</button>
+				<div class="skin-3">
+					<div class="sidebar sidebar-fixed id="sidebar">
+						<div class="sidebar-shortcuts" id="sidebar-shortcuts">
+							<div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
+								<button class="btn btn-success">
+									<i class="icon-signal"></i>
+								</button>
+								<button class="btn btn-info">
+									<i class="icon-pencil"></i>
+								</button>
+								<button class="btn btn-warning">
+									<i class="icon-group"></i>
+								</button>
+								<button class="btn btn-danger">
+									<i class="icon-cogs"></i>
+								</button>
+							</div>
+							<div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
+								<span class="btn btn-success"></span>
+								<span class="btn btn-info"></span>
+								<span class="btn btn-warning"></span>
+								<span class="btn btn-danger"></span>
+							</div>
 						</div>
-						<div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
-							<span class="btn btn-success"></span>
-							<span class="btn btn-info"></span>
-							<span class="btn btn-warning"></span>
-							<span class="btn btn-danger"></span>
+						<ul class="nav nav-list">
+							<li
+							<% if current_page?(:controller=>'home') || current_page?(:default)%>
+								class="active"<%end%>>
+								<a href="<%= home_index_path%>"> <i class="icon-dashboard"></i> <span class="menu-text"> Dashboard </span> </a>
+							</li>
+							<li
+							<% if current_page?(:controller=>'shops') %>
+								class="active"<%end%>>
+								<a href="<%= shops_path%>"> <i class="icon-shopping-cart"></i> <span class="menu-text"> Stores </span> </a>
+							</li>
+							<li
+							<% if controller.controller_name == 'sales' %>
+								class="active open"<%end%>>
+								<a href="#" class="dropdown-toggle"> <i class="icon-usd"></i> <span class="menu-text"> Sales </span> <b class="arrow icon-angle-down"></b> </a>
+								<ul class="submenu">
+									<li <% if current_page?(:controller=>'sales', :action=>'index') %>
+										class="active"<%end%>>
+										<a href="<%= sales_path%>"> <i class="icon-double-angle-right"></i> Overview </a>
+									</li>
+									<li <% if current_page?(sales_all_path) %>
+										class="active"<%end%>>
+										<a href="<%= sales_all_path%>"> <i class="icon-double-angle-right"></i> All Stores </a>
+									</li>
+									<li>
+										<a href="sales/store"> <i class="icon-double-angle-right"></i> Statistics &amp; Analysis</a>
+									</li>
+								</ul>
+							</li>
+							<li
+							<% if current_page?(:controller=>'deliveries') %>
+								class="active"<%end%>> <a href="<%= deliveries_path%>"> <i class="icon-plane"></i> <span class="menu-text"> Deliveries </span> </a>
+							</li>
+							<li
+							<% if current_page?(:controller=>'items') %>
+								class="active"<%end%>> <a href="<%= items_path%>"> <i class="icon-th"></i> <span class="menu-text"> Products </span> </a>
+							</li>
+							<li>
+								<a href="calendar"> <i class="icon-calendar"></i> <span class="menu-text"> Calendar </span> </a>
+							</li>
+							<li
+							<% if current_page?(:controller=>'admin')%>
+								class="active"<%end%>> <a href="<%= admin_index_path%>"> <i class="icon-cog"></i> <span class="menu-text"> Admin </span> </a>
+							</li>
+						</ul>
+						<div class="sidebar-collapse" id="sidebar-collapse">
+							<i class="icon-double-angle-left" data-icon1="icon-double-angle-left" data-icon2="icon-double-angle-right"></i>
 						</div>
+						<script type="text/javascript">
+							try {
+								ace.settings.check('sidebar', 'collapsed');
+							} catch(e) {
+								console.log(e);
+							}
+						</script>
 					</div>
-					<ul class="nav nav-list">
-						<li
-						<% if current_page?(:controller=>'home') || current_page?(:default)%>
-							class="active"<%end%>>
-							<a href="<%= home_index_path%>"> <i class="icon-dashboard"></i> <span class="menu-text"> Dashboard </span> </a>
-						</li>
-						<li
-						<% if current_page?(:controller=>'shops') %>
-							class="active"<%end%>>
-							<a href="<%= shops_path%>"> <i class="icon-shopping-cart"></i> <span class="menu-text"> Stores </span> </a>
-						</li>
-						<li
-						<% if controller.controller_name == 'sales' %>
-							class="active open"<%end%>>
-							<a href="#" class="dropdown-toggle"> <i class="icon-usd"></i> <span class="menu-text"> Sales </span> <b class="arrow icon-angle-down"></b> </a>
-							<ul class="submenu">
-								<li <% if current_page?(:controller=>'sales', :action=>'index') %>
-									class="active"<%end%>>
-									<a href="<%= sales_path%>"> <i class="icon-double-angle-right"></i> Overview </a>
-								</li>
-								<li <% if current_page?(sales_all_path) %>
-									class="active"<%end%>>
-									<a href="<%= sales_all_path%>"> <i class="icon-double-angle-right"></i> All Stores </a>
-								</li>
-								<li>
-									<a href="sales/store"> <i class="icon-double-angle-right"></i> Statistics &amp; Analysis</a>
-								</li>
-							</ul>
-						</li>
-						<li
-						<% if current_page?(:controller=>'deliveries') %>
-							class="active"<%end%>> <a href="<%= deliveries_path%>"> <i class="icon-plane"></i> <span class="menu-text"> Deliveries </span> </a>
-						</li>
-						<li
-						<% if current_page?(:controller=>'items') %>
-							class="active"<%end%>> <a href="<%= items_path%>"> <i class="icon-th"></i> <span class="menu-text"> Products </span> </a>
-						</li>
-						<li>
-							<a href="calendar"> <i class="icon-calendar"></i> <span class="menu-text"> Calendar </span> </a>
-						</li>
-						<li
-						<% if current_page?(:controller=>'admin')%>
-							class="active"<%end%>> <a href="<%= admin_index_path%>"> <i class="icon-cog"></i> <span class="menu-text"> Admin </span> </a>
-						</li>
-					</ul>
-					<div class="sidebar-collapse" id="sidebar-collapse">
-						<i class="icon-double-angle-left" data-icon1="icon-double-angle-left" data-icon2="icon-double-angle-right"></i>
-					</div>
-					<script type="text/javascript">
-						try {
-							ace.settings.check('sidebar', 'collapsed');
-						} catch(e) {
-							console.log(e);
-						}
-					</script>
 				</div>
 				<div class="main-content">
 					<div class="breadcrumbs breadcrumbs-fixed" id="breadcrumbs">
