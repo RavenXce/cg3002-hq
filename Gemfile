@@ -46,4 +46,6 @@ end
 # gem 'debugger', group: [:development, :test]
 
 gem 'country-select'
-gem 'chosen-rails' 
+gem 'chosen-rails'
+gem 'jquery-datatables-rails', github: 'rweng/jquery-datatables-rails'
+gem 'will_paginate'
