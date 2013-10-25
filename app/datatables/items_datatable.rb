@@ -17,7 +17,7 @@ class ItemsDatatable
 private
 
   def data
-    items.map do |item|
+    items.map do |item| #XXX: Move standardized HTML to client-side view through jQuery DOM injection!
       [
         '<td class="center"><label>
               <input type="checkbox" class="ace" />
