@@ -1,11 +1,13 @@
 HqServer::Application.routes.draw do
   post 'admin/item_dump', to: 'admin#item_dump'
+  get 'sales', to: 'sales#index'
   get 'sales/all', to: 'sales#all'
+  get 'sales/stats/:id', to: 'sales#stats', as: 'sales_stats'
   resources :home
   resources :admin
   resources :items, :path => 'products'
   resources :shops, :path => 'stores'
-  resources :sales
+  #resources :sales
   resources :deliveries
   root 'home#index', as: :default
   # The priority is based upon order of creation: first created -> highest priority.

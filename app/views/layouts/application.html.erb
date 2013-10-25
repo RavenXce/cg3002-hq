@@ -71,13 +71,15 @@
 						</li>
 						<li
 						<% if current_page?(:controller=>'sales') %>
-							class="active"<%end%>>
+							class="active open"<%end%>>
 							<a href="#" class="dropdown-toggle"> <i class="icon-usd"></i> <span class="menu-text"> Sales </span> <b class="arrow icon-angle-down"></b> </a>
 							<ul class="submenu">
-								<li>
+								<li <% if current_page?(:controller=>'sales', :action=>'index') %>
+									class="active"<%end%>>
 									<a href="<%= sales_path%>"> <i class="icon-double-angle-right"></i> Overview </a>
 								</li>
-								<li>
+								<li <% if current_page?(sales_all_path) %>
+									class="active"<%end%>>
 									<a href="<%= sales_all_path%>"> <i class="icon-double-angle-right"></i> All Stores </a>
 								</li>
 								<li>

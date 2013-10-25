@@ -10,4 +10,8 @@ class SalesController < ApplicationController
     @sales = Sale.all.order('date DESC').offset(offset).limit(limit)
     render :all 
   end
+  
+  def stats
+    
+  end
 end
