@@ -859,7 +859,7 @@ body.skin-2 .main-content{
 .skin-3 .navbar  {
  background:#393939;
 }
-
+.skin-3.sidebar , .skin-3.sidebar:before,
 .skin-3  .sidebar , .skin-3  .sidebar:before {
  background-color:#D6D6D6;
  border-right:1px solid #A4C6DD;
@@ -1073,6 +1073,7 @@ body.skin-2 .main-content{
  min-height:40px;
  border-left:3px solid #444;
 }
+.skin-3.sidebar > .nav-search,
 .skin-3 .sidebar > .nav-search {
  background-color:#E0E0E0;
  border-bottom:none;
@@ -1115,11 +1116,13 @@ body.skin-3 .main-content {
 
 @media only screen and (max-width: 991px) {
 
+.skin-3.sidebar,
 .skin-3  .sidebar,
 .skin-3  .nav-list > li ,
 .skin-3 .sidebar-shortcuts {
  border-left:none;
 }
+.skin-3.sidebar,
 .skin-3 .sidebar {
  border-color:#A4C6DD;
 }
