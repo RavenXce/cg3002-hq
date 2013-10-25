@@ -36,7 +36,7 @@
 			<div class="main-container-inner">
 				<a class="menu-toggler" id="menu-toggler" href="#"> <span class="menu-text"></span> </a>
 				<div class="skin-3">
-					<div class="sidebar sidebar-fixed id="sidebar">
+					<div class="sidebar sidebar-fixed" id="sidebar">
 						<div class="sidebar-shortcuts" id="sidebar-shortcuts">
 							<div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
 								<button class="btn btn-success">
@@ -72,15 +72,16 @@
 							</li>
 							<li
 							<% if controller.controller_name == 'sales' %>
-								class="active open"<%end%>>
+							class="active open"<%end%>>
 								<a href="#" class="dropdown-toggle"> <i class="icon-usd"></i> <span class="menu-text"> Sales </span> <b class="arrow icon-angle-down"></b> </a>
 								<ul class="submenu">
-									<li <% if current_page?(:controller=>'sales', :action=>'index') %>
+									<li <% if current_page?(:controller=>'sales', :action=>
+										'index') %>
 										class="active"<%end%>>
 										<a href="<%= sales_path%>"> <i class="icon-double-angle-right"></i> Overview </a>
 									</li>
 									<li <% if current_page?(sales_all_path) %>
-										class="active"<%end%>>
+									class="active"<%end%>>
 										<a href="<%= sales_all_path%>"> <i class="icon-double-angle-right"></i> All Stores </a>
 									</li>
 									<li>
@@ -158,11 +159,12 @@
 			<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse"> <i class="icon-double-angle-up icon-only bigger-110"></i> </a>
 			<% if defined? @errors %>
 			<script>
-			$.gritter.add({
-				title : 'Error',
-				text : '<%= @errors%>',
-				class_name : 'gritter-error'
-			});
+				$.gritter.add({
+title : 'Error',
+text : '<%= @errors%>
+	',
+	class_name : 'gritter-error'
+	});
 			</script>
 			<% end %>
 		</div>
