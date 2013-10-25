@@ -70,7 +70,7 @@
 							<a href="<%= shops_path%>"> <i class="icon-shopping-cart"></i> <span class="menu-text"> Stores </span> </a>
 						</li>
 						<li
-						<% if current_page?(:controller=>'sales') %>
+						<% if controller.controller_name == 'sales' %>
 							class="active open"<%end%>>
 							<a href="#" class="dropdown-toggle"> <i class="icon-usd"></i> <span class="menu-text"> Sales </span> <b class="arrow icon-angle-down"></b> </a>
 							<ul class="submenu">
