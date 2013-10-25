@@ -8,7 +8,8 @@ $(document).on('ready page:load', function() {
 		aoColumnDefs: [
 	      { "bSortable": false, "aTargets": [ 0, 7 ] },
 	      { "sClass": "hidden-480", "aTargets": [ 3, 4 ] },
-	      { "sClass": "hidden-480", "aTargets": [ 3, 4 ] },
+	      { "sWidth": "25%", "aTargets": [ 2 ] },
+	      { "sWidth": "100px", "aTargets": [ 7 ] }
 	    ],
 	    aaSorting: [[6,'asc']]
 	});

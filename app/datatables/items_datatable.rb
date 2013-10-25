@@ -63,7 +63,7 @@ private
   def fetch_items
     items = Item.order("#{sort_column} #{sort_direction}")
     items = items.page(page).per_page(per_page)
-    if params[:sSearch].present? && !param[:sSearch].empty?
+    if params[:sSearch].present?
       items = items.where("product_name like :search or manufacturer like :search or category like :search or barcode like :search", search: "%#{params[:sSearch]}%")
     end
     items
