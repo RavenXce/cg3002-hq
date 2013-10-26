@@ -10,7 +10,7 @@
 			Product Listing
 		</div>
 		<div class="table-responsive">
-			<table id="all-products-table" class="table table-striped table-bordered table-hover" data-source="<%=items_url(format: "json")%>">
+			<table id="all-products-table" class="table table-striped table-bordered table-hover" data-source="<%= items_url(format: "json")%>">
 				<thead>
 					<tr>
 						<th class="center sorting_disabled"><label>
@@ -25,9 +25,99 @@
 						<th class="sorting_disabled"></th>
 					</tr>
 				</thead>
-				<tbody>
-				</tbody>
+				<tbody></tbody>
 			</table>
 		</div>
+		<!-- START MODAL FORM ADD -->
+		<div id="modal-form-add" class="modal" tabindex="-1">
+			<form action="products" method="post">
+				<%= tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token) %>
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">
+								&times;
+							</button>
+							<h4 class="blue bigger">Add Products</h4>
+						</div>
+						<div class="modal-body overflow-visible">
+							<div class="row">
+								<div class="col-xs-12 col-sm-5">
+									<div class="space-28"></div>
+									<input type="file" id="item-file-input"/>
+								</div>
+								<div class="col-xs-12 col-sm-7">
+									<div class="row">
+										<div class="col-xs-12 col-sm-5">
+											<div class="form-group">
+												<label for="form-field-id">Barcode</label>
+												<div>
+													<input name="barcode" class="input-medium numeric-only" type="text"id="form-field-barcode" placeholder="" value="" />
+												</div>
+											</div>
+										</div>
+										<div class="col-xs-12 col-sm-7">
+											<label for="form-field-id">Cost Price</label>
+											<div class="input-group">
+												<span class="input-group-addon"> <i class="icon-usd"></i> </span>
+												<input name="cost_price" class="input-small" type="text"id="form-field-price" placeholder="" value="" />
+											</div>
+										</div>
+									</div>
+									<div class="space-4"></div>
+									<div class="form-group">
+										<label for="form-field-address">Product Name</label>
+										<div>
+											<input name="product_name" class="input-xlarge" type="text" id="form-field-name" placeholder="" value="" />
+										</div>
+									</div>
+									<div class="space-4"></div>
+									<div class="form-group">
+										<label for="form-field-address">Manufacturer</label>
+										<div>
+											<input name="manufacturer" class="input-xlarge" type="text" id="form-field-manufacturer" placeholder="" value="" />
+										</div>
+									</div>
+									<div class="space-4"></div>
+									<div class="form-group">
+										<label for="form-field-address">Category</label>
+										<div>
+											<input name="category" class="input-xlarge" type="text" id="form-field-category" placeholder="" value="" />
+										</div>
+									</div>
+									<div class="space-4"></div>
+									<div class="row">
+										<div class="col-xs-12 col-sm-6">
+											<div class="form-group">
+												<label for="form-field-bundle-unit">Bundle Unit</label>
+												<div>
+													<input name="bundle_unit" class="input-small numeric-only" type="text" id="form-field-bundle-unit" placeholder="" value="0" />
+												</div>
+											</div>
+										</div>
+										<div class="col-xs-12 col-sm-6">
+											<div class="form-group">
+												<label for="form-field-minimum-stock">Minimum Stock</label>
+												<div>
+													<input name="minimum_stock" class="input-small numeric-only" type="text" id="form-field-minimum-stock" placeholder="" value="100" />
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="modal-footer">
+								<button class="btn btn-sm" data-dismiss="modal">
+									<i class="icon-remove"></i> Cancel
+								</button>
+								<button class="btn btn-sm btn-primary" type="submit">
+									<i class="icon-ok"></i> Add
+								</button>
+							</div>
+						</div>
+					</div>
+			</form>
+		</div>
+		<!-- END MODAL FORM ADD -->
 	</div>
 </div>

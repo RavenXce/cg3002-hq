@@ -21,3 +21,9 @@
 
 en:
   hello: "Hello world"
+
+en:
+  activerecord:
+    attributes:
+      shop:
+        s_id: "Shop ID"

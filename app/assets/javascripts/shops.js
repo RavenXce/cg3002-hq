@@ -17,7 +17,7 @@ $(document).on('ready  page:load', function() {
 	});
 	$('#shop-file-input').ace_file_input({
 		style : 'well',
-		btn_choose : 'Drop shop data files here or click to choose',
+		btn_choose : 'Drop shop data files here for batch add/update',
 		btn_change : null,
 		no_icon : 'icon-cloud-upload',
 		droppable : true,

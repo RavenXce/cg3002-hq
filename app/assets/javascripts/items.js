@@ -18,12 +18,12 @@ $(document).on('ready page:load', function() {
 			"sWidth" : "100px",
 			"aTargets" : [7]
 		}],
-		aaSorting : [[6, 'asc']],
+		aaSorting : [[6, 'desc']],
 		"fnRowCallback" : function(nRow, aData) {
 			$(nRow).data('id', aData[8]);
 		},
 		fnDrawCallback : function() {// Injection to modify DOM
-			$('.dataTables_actions').html('<a href="#" data-rel="tooltip" title="Add a new product"><i class="icon-plus-sign purple bigger-130"></i></a>' + '<a href="#" data-rel="tooltip" title="Batch update products"><i class="icon-pencil blue bigger-130"></i></a>' + '<a href="#" data-rel="tooltip" title="Add products to stores"><i class="icon-zoom-in grey bigger-130"></i></a>' + '<a href="#" class="tooltip-error" data-rel="tooltip" title="Batch removal"><i class="icon-trash red bigger-130"></i></a>');
+			$('.dataTables_actions').html('<a href="#modal-form-add" data-rel="tooltip" data-toggle="modal" title="Add a new product"><i class="icon-plus-sign purple bigger-130"></i></a>' + '<a href="#" data-rel="tooltip" title="Batch update products"><i class="icon-pencil blue bigger-130"></i></a>' + '<a href="#" data-rel="tooltip" title="Add products to stores"><i class="icon-zoom-in grey bigger-130"></i></a>' + '<a href="#" class="tooltip-error" data-rel="tooltip" title="Batch removal"><i class="icon-trash red bigger-130"></i></a>');
 			$('[data-rel=tooltip]').tooltip();
 			$('.delete-item').on(ace.click_event, function(e) {
 				e.preventDefault();
@@ -57,5 +57,14 @@ $(document).on('ready page:load', function() {
 				});
 			});
 		}
+	});
+	
+	$('#item-file-input').ace_file_input({
+		style : 'well',
+		btn_choose : 'Drop item data files here for batch add/update',
+		btn_change : null,
+		no_icon : 'icon-cloud-upload',
+		droppable : true,
+		thumbnail : 'small'
 	});
 });
