@@ -3,3 +3,34 @@
   @page_sub_header = "overview"
   @breadcrumbs = [["Sales",sales_path], "Overview"]
 %>
+
+<div class="row">
+	<div class="col-sm-4">
+		<div class="widget-box">
+			<div class="widget-header">
+				<h4>Upload Shop Transaction</h4>
+				<span class="widget-toolbar"> <a href="#" data-action="collapse"><i class="icon-chevron-up"></i></a> <a href="#" data-action="close"><i class="icon-remove"></i></a> </span>
+			</div>
+			<div class="widget-body">
+				<div class="widget-main">
+					<input type="file" id="transaction-upload" />
+					<div class="form-group">
+						<label for="form-field-select-shop-id">For Shop</label>
+						<div>
+							<select class="chosen-select" data-width="100%" data-placeholder="Choose a Shop...">
+								<% @shops.each do |shop| %>
+								<option value="<%=shop.id%>"><%= "%05d" % shop.s_id%></option>
+								<% end %>
+							</select>
+						</div>
+					</div>
+					<div class="space-8"></div>
+					<button class="btn btn-success btn-block">
+						<i class="icon-cloud-upload bigger-110"></i>
+						Upload
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

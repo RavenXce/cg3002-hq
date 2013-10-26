@@ -1,5 +1,6 @@
 HqServer::Application.routes.draw do
   post 'admin/item_dump', to: 'admin#item_dump'
+  post 'products/sync/:id', to: 'items#sync'
   get 'sales', to: 'sales#index'
   get 'sales/all', to: 'sales#all'
   get 'sales/stats/:id', to: 'sales#stats', as: 'sales_stats'

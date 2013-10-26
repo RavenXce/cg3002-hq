@@ -3,10 +3,6 @@ $(document).on('ready  page:load', function() {
 	$('.edit-shop').on(ace.click_event, function() {
 		$('#modal-form-edit').load('/stores/'+$(this).parents('tr').data('id')+'/edit');
 	});
-	$(".chosen-select").chosen({
-		width : '90%'
-	});
-	$(".numeric-only").ForceNumericOnly();
 	$('.delivery-timepicker').timepicker({
 		minuteStep : 1,
 		showSeconds : false,

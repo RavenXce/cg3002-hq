@@ -156,6 +156,7 @@
 			</div>
 			<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse"> <i class="icon-double-angle-up icon-only bigger-110"></i> </a>
 			<%= javascript_tag "var PAGE_ERRORS = #{raw @errors.to_json};" if defined? @errors %>
+			<%= javascript_tag "var PAGE_MESSAGES = #{raw @errors.to_json};" if defined? @messages %>
 			<%= javascript_tag "var AUTH_TOKEN = #{form_authenticity_token.inspect};" if protect_against_forgery? %>
 		</div>
 	</body>

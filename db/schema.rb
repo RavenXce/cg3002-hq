@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131026113034) do
+ActiveRecord::Schema.define(version: 20131026133409) do
 
   create_table "hq_deliveries", force: true do |t|
     t.integer  "supplier_id"
@@ -43,7 +43,7 @@ ActiveRecord::Schema.define(version: 20131026113034) do
   add_index "hq_items", ["item_id"], name: "index_hq_items_on_item_id", using: :btree
 
   create_table "items", force: true do |t|
-    t.integer  "barcode"
+    t.string   "barcode"
     t.string   "product_name"
     t.string   "category"
     t.string   "manufacturer"
