@@ -13,13 +13,13 @@
 			</div>
 			<div class="widget-body">
 				<div class="widget-main">
-					<form action="sales" action="post">
+					<form action="sales/transaction_dump" enctype="multipart/form-data" method="post">
 						<%= tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token) %>
 						<input type="file" name="transactions" id="transaction-upload" />
 						<div class="form-group">
 							<label for="form-field-select-shop-id">For Shop</label>
 							<div>
-								<select name="s_id" class="chosen-select" data-width="100%" data-placeholder="Choose a Shop...">
+								<select name="shop_id" class="chosen-select" data-width="100%" data-placeholder="Choose a Shop...">
 									<% @shops.each do |shop| %>
 									<option value="<%= shop.id%>"><%= "%05d" % shop.s_id%></option>
 									<% end %>
