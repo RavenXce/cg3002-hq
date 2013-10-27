@@ -2,10 +2,10 @@ HqServer::Application.routes.draw do
   post 'admin/item_dump', to: 'admin#item_dump'
   post 'products/sync/:id', to: 'items#sync'
   post 'sales/transaction_dump', to: 'sales#transaction_dump'
+  post 'sales/:id', to: 'sales#create'
   get 'sales', to: 'sales#index'
   get 'sales/all', to: 'sales#all'
   get 'sales/stats/:id', to: 'sales#stats', as: 'sales_stats'
-  post 'sales/:id', to: 'sales#create'
   resources :home
   resources :admin
   resources :items, :path => 'products'

@@ -1,0 +1,87 @@
+<form id="form-edit-item" action="/products/<%=@item.id%>" method="post">
+	<%= form_tag('/products', method: "patch")%>
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">
+					&times;
+				</button>
+				<h4 class="blue bigger">Edit Product</h4>
+			</div>
+			<div class="modal-body overflow-visible">
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="row">
+							<div class="col-xs-12 col-sm-5">
+								<div class="form-group">
+									<label for="form-field-id">Barcode</label>
+									<div>
+										<input name="barcode" class="input-medium numeric-only" type="text"id="form-field-barcode" placeholder="" value="<%= @item.barcode%>" />
+									</div>
+								</div>
+							</div>
+							<div class="col-xs-12 col-sm-6 col-sm-offset-1">
+								<label for="form-field-id">Cost Price</label>
+								<div class="input-group">
+									<span class="input-group-addon"> <i class="icon-usd"></i> </span>
+									<input name="cost_price" class="input-small" type="text"id="form-field-price" placeholder="" value="<%= number_to_currency @item.cost_price, :unit => ""%>" />
+								</div>
+							</div>
+						</div>
+						<div class="space-4"></div>
+						<div class="form-group">
+							<label for="form-field-address">Product Name</label>
+							<div>
+								<input name="product_name" class="input-xlarge" type="text" id="form-field-name" placeholder="" value="<%= @item.product_name%>" />
+							</div>
+						</div>
+						<div class="space-4"></div>
+						<div class="form-group">
+							<label for="form-field-address">Manufacturer</label>
+							<div>
+								<input name="manufacturer" class="input-xlarge" type="text" id="form-field-manufacturer" placeholder="" value="<%= @item.manufacturer%>" />
+							</div>
+						</div>
+						<div class="space-4"></div>
+						<div class="form-group">
+							<label for="form-field-address">Category</label>
+							<div>
+								<input name="category" class="input-xlarge" type="text" id="form-field-category" placeholder="" value="<%= @item.category%>" />
+							</div>
+						</div>
+						<div class="space-4"></div>
+						<div class="row">
+							<div class="col-xs-12 col-sm-6">
+								<div class="form-group">
+									<label for="form-field-bundle-unit">Bundle Unit</label>
+									<div>
+										<input name="bundle_unit" class="input-small numeric-only" type="text" id="form-field-bundle-unit" placeholder="" value="<%= @item.bundle_unit%>" />
+									</div>
+								</div>
+							</div>
+							<div class="col-xs-12 col-sm-6">
+								<div class="form-group">
+									<label for="form-field-minimum-stock">Minimum Stock</label>
+									<div>
+										<input name="minimum_stock" class="input-small numeric-only" type="text" id="form-field-minimum-stock" placeholder="" value="<%= @item.minimum_stock%>" />
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button class="btn btn-sm" data-dismiss="modal">
+						<i class="icon-remove"></i> Cancel
+					</button>
+					<button class="btn btn-sm btn-primary" type="submit">
+						<i class="icon-ok"></i> Save
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</form>
+<script>
+	$(".numeric-only").ForceNumericOnly();
+</script>

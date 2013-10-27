@@ -1,7 +1,7 @@
 $(document).on('ready  page:load', function() {
 	var allShopsTable = $('#all-shops-table').dataTable();
 	$('.edit-shop').on(ace.click_event, function() {
-		$('#modal-form-edit').load('/stores/'+$(this).parents('tr').data('id')+'/edit');
+		$('#modal-form-edit-shop').load('/stores/'+$(this).parents('tr').data('id')+'/edit');
 	});
 	$('.delivery-timepicker').timepicker({
 		minuteStep : 1,

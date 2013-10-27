@@ -31,7 +31,7 @@ private
         item.updated_at.strftime("%b %e, %Y"),
         '<div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
               <a class="blue" href="#"><i class="icon-zoom-in bigger-130"></i></a>
-              <a class="green edit-item" href="#"><i class="icon-pencil bigger-130"></i></a>
+              <a class="green edit-item" href="#modal-form-edit-item" role="button" data-toggle="modal"><i class="icon-pencil bigger-130"></i></a>
               <a class="red delete-item" href="#"><i class="icon-trash bigger-130"></i></a>
             </div>
             <div class="visible-xs visible-sm hidden-md hidden-lg">

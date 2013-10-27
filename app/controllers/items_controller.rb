@@ -1,4 +1,6 @@
 class ItemsController < ApplicationController
+  layout false, :only => [:edit]
+  
   def index
     respond_to do |format|
       format.html { @items = Item.all }
@@ -24,12 +26,23 @@ class ItemsController < ApplicationController
       shop_item = shop.shop_items.find_or_initialize_by_barcode(item.barcode)
       shop_item.update_attributes(:current_stock => shop_item.current_stock, :selling_price => new_price)
     end
-    updated_items = shop.shop_items.all()
+    updated_items = shop.shop_items.include(:item).all()
 
     respond_to do |format|
       format.html { render :index }
       format.json { render :json => {:shop_items => updated_items.to_json}, status: :ok }
     end
+  end
+  
+  def edit
+    @item = Item.find(params[:id])
+    render :edit
+  end
+  
+  def update
+    item = Item.find(params[:id])
+    item.update(create_params)
+    render :index
   end
 
   def destroy

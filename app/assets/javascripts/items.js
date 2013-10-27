@@ -1,10 +1,10 @@
-$(document).on('ready page:load', function() {
-	var allProductsTable = $('#all-products-table').dataTable({
+$(document).on('ready page:load', function() {	
+	var allProductsTable = $('#all-items-table').dataTable({
 		sPaginationType : "bootstrap",
 		bJQueryUI : false,
 		bProcessing : true,
 		bServerSide : true,
-		sAjaxSource : $('#all-products-table').data('source'),
+		sAjaxSource : $('#all-items-table').data('source'),
 		aoColumnDefs : [{
 			"bSortable" : false,
 			"aTargets" : [0, 7]
@@ -23,8 +23,11 @@ $(document).on('ready page:load', function() {
 			$(nRow).data('id', aData[8]);
 		},
 		fnDrawCallback : function() {// Injection to modify DOM
-			$('.dataTables_actions').html('<a href="#modal-form-add" data-rel="tooltip" data-toggle="modal" title="Add a new product"><i class="icon-plus-sign purple bigger-130"></i></a>' + '<a href="#" data-rel="tooltip" title="Batch update products"><i class="icon-pencil blue bigger-130"></i></a>' + '<a href="#" data-rel="tooltip" title="Add products to stores"><i class="icon-zoom-in grey bigger-130"></i></a>' + '<a href="#" class="tooltip-error" data-rel="tooltip" title="Batch removal"><i class="icon-trash red bigger-130"></i></a>');
+			$('.dataTables_actions').html('<a href="#modal-form-add-item" data-rel="tooltip" data-toggle="modal" title="Add a new product"><i class="icon-plus-sign purple bigger-130"></i></a>' + '<a href="#" data-rel="tooltip" title="Batch update products"><i class="icon-pencil blue bigger-130"></i></a>' + '<a href="#" data-rel="tooltip" title="Add products to stores"><i class="icon-zoom-in grey bigger-130"></i></a>' + '<a href="#" class="tooltip-error" data-rel="tooltip" title="Batch removal"><i class="icon-trash red bigger-130"></i></a>');
 			$('[data-rel=tooltip]').tooltip();
+			$('.edit-item').on(ace.click_event, function() {
+				$('#modal-form-edit-item').load('/products/'+$(this).parents('tr').data('id')+'/edit');
+			});
 			$('.delete-item').on(ace.click_event, function(e) {
 				e.preventDefault();
 				$row = $(this).parents('tr');
