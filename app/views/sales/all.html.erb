@@ -7,61 +7,24 @@
 	<div class="col-xs-12">
 		<h3 class="header smaller lighter blue">All Transactions</h3>
 		<div class="table-header">
-			Transaction Listing
+			Transaction Summaries
 		</div>
 		<div class="table-responsive">
-			<table id="all-sales-table" class="table table-striped table-bordered table-hover">
+			<table id="all-sales-table" data-source="<%= sales_all_path(format: "json")%>" class="table table-striped table-bordered table-hover">
 				<thead>
 					<tr>
-						<th class="center sorting_disabled"><label>
+						<th class="center"><label>
 							<input type="checkbox" class="ace" />
 							<span class="lbl"></span></label></th>
 						<th>Date <i class="icon-time bigger-110 hidden-480"> </th>
 						<th>Shop ID </th>
-						<th>Item Barcode </th>
-						<th class="hidden-480">Item Name </th>
+						<th>Item Name </th>
+						<th class="hidden-480">Barcode </th>
 						<th>Quantity </th>
 						<th class="hidden-480">Price </th>
-						<th class="sorting_disabled"></th>
 					</tr>
 				</thead>
 				<tbody>
-					<% @sales.each do |sale| %>
-					<tr>
-						<td class='center'><label>
-							<input type='checkbox' class="ace" />
-							<span class="lbl"></span></label></td>
-						<td><a href='#'><%= sale.date%></a></td>
-						<td><a href='#'><%= sale.item.barcode%></a></td>
-						<td class='hidden-480'><a href='#'><%= sale.item.product_name%></a></td>
-						<td><%= sale.date%></td>
-						<td class='hidden-480'><a href='#'><%= '$' + "%0.2f" % sale.price%></a> &nbsp;&nbsp;&nbsp; </td>
-						<td>
-						<div class='visible-md visible-lg hidden-sm hidden-xs action-buttons'>
-							<a class="blue" href="#"><i class="icon-zoom-in bigger-130"></i></a>
-							<a class="green" href="#"><i class="icon-pencil bigger-130"></i></a>
-							<a class="red" href="#"><i class="icon-trash bigger-130"></i></a>
-						</div>
-						<div class='visible-xs visible-sm hidden-md hidden-lg'>
-							<div class="inline position-relative">
-								<button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown">
-									<i class="icon-caret-down icon-only bigger-120"></i>
-								</button>
-								<ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
-									<li>
-										<a href="#" class="tooltip-info" data-rel="tooltip" title="View"><span class="blue"><i class="icon-zoom-in bigger-120"></i></span></a>
-									</li>
-									<li>
-										<a href="#" class="tooltip-success" data-rel="tooltip" title="Edit"><span class="green"><i class="icon-edit bigger-120"></i></span></a>
-									</li>
-									<li>
-										<a href="#" class="tooltip-error" data-rel="tooltip" title="Delete"><span class="red"><i class="icon-trash bigger-120"></i></span> </a>
-									</li>
-								</ul>
-							</div>
-						</div></td>
-					</tr>
-					<% end %>
 				</tbody>
 			</table>
 		</div>

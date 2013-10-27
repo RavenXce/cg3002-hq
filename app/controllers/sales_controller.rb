@@ -3,6 +3,28 @@ class SalesController < ApplicationController
   def index
   end
 
+  def create
+    respond_to do |format|
+      format.html { render :index }
+      format.json do
+        begin
+          params.require(:sales, :id)
+          new_sales = ActiveSupport::JSON.decode(params[:sales])
+          Sale.transaction do
+            new_sales.each do |new_sale|
+              item = Item.find_by_barcode(new_sale.barcode)
+              Sale.create(:count => new_sale.quantity, :price => new_sale.price, :date => new_sale.date, :shop_id => params[:id], :item_id => item.id)
+            end
+          end
+        rescue
+          render :json => {:success => false}, status: 422
+          return
+        end
+        render :json => {:success => true}, status: :ok
+      end
+    end
+  end
+
   def transaction_dump
     if !(params.has_key?(:transactions) && params.has_key?(:shop_id)) then
       @errors = "Invalid parameters"
@@ -15,7 +37,7 @@ class SalesController < ApplicationController
     if shop.nil?
       @errors = "Invalid shop ID: " + params[:shop_id]
       render :index
-      return
+    return
     end
 
     data_lines = params[:transactions].read.lines.map(&:chomp)
@@ -37,12 +59,10 @@ class SalesController < ApplicationController
   end
 
   def all
-    offset = params[:offset]
-    limit = params[:limit]
-    offset ||= 0
-    limit ||= 5000
-    @sales = Sale.all.order('date DESC').offset(offset).limit(limit)
-    render :all
+    respond_to do |format|
+      format.html { render :all }
+      format.json { render json: SalesDatatable.new(view_context) }
+    end
   end
 
   def stats
