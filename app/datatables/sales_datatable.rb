@@ -41,7 +41,7 @@ private
     sales = Sale.includes(:item, :shop).order("#{sort_column} #{sort_direction}").references(:item, :shop)
     sales = sales.page(page).per_page(per_page)
     if params[:sSearch].present?
-      sales = sales.where("item.product_name like :search or item.barcode like :search or shop.s_id like :search", search: "%#{params[:sSearch]}%")
+      sales = sales.where("items.product_name like :search or items.barcode like :search or shops.s_id like :search", search: "%#{params[:sSearch]}%")
     end
     sales
   end
@@ -55,7 +55,7 @@ private
   end
 
   def sort_column
-    columns = %w[sale.id date shop.s_id item.barcode item.product_name count price] #id is unsortable
+    columns = %w[sale.id date shop.s_id item.product_name item.barcode count price] #id is unsortable
     columns[params[:iSortCol_0].to_i]
   end
 

@@ -7,9 +7,9 @@ class SalesController < ApplicationController
     begin
       params.require(:sales, :id)
       Sale.transaction do
-        params[:sales].each do |new_sale|
-          item = Item.find_by_barcode(new_sale.barcode)
-          Sale.create(:count => new_sale[:quantity], :price => new_sale[:price], :date => new_sale[:date], :shop_id => params[:id], :item_id => item.id)
+        params[:sales].each do |sale|
+          item = Item.find_by_barcode(sale.barcode)
+          Sale.create(:count => sale[:quantity], :price => sale[:price], :date => sale[:date], :shop_id => params[:id], :item_id => item.id)
         end
       end
     rescue
