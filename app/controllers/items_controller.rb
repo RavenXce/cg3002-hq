@@ -19,19 +19,20 @@ class ItemsController < ApplicationController
   end
 
   def sync
-    shop = Shop.find_by_s_id(params[:s_id])
-    items = ActiveSupport::JSON.decode(params[:shop_items])
-    items.each do |item|
-      new_price = active_pricing(item.barcode, item.current_stock)
-      shop_item = shop.shop_items.find_or_initialize_by_barcode(item.barcode)
-      shop_item.update_attributes(:current_stock => shop_item.current_stock, :selling_price => new_price)
-    end
-    updated_items = shop.shop_items.include(:item).all()
-
-    respond_to do |format|
-      format.html { render :index }
-      format.json { render :json => {:shop_items => updated_items.to_json}, status: :ok }
-    end
+    begin      
+      shop = Shop.find_by_s_id(params[:s_id])
+      items = ActiveSupport::JSON.decode(params[:shop_items])
+      items.each do |item|
+        new_price = active_pricing(item.barcode, item.current_stock)
+        shop_item = shop.shop_items.find_or_initialize_by_barcode(item.barcode)
+        shop_item.update_attributes(:current_stock => shop_item.current_stock, :selling_price => new_price)
+      end
+      updated_items = shop.shop_items.include(:item).all()          
+    rescue => e
+      render :json => {:success => false, :errors => e.messages}, status: 422
+    else
+      render :json => {:success => true, :shop_items => updated_items.to_json}, status: :ok
+    end    
   end
   
   def edit

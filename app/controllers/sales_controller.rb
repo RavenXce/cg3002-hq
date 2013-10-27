@@ -4,24 +4,19 @@ class SalesController < ApplicationController
   end
 
   def create
-    respond_to do |format|
-      format.html { render :index }
-      format.json do
-        begin
-          params.require(:sales, :id)
-          new_sales = ActiveSupport::JSON.decode(params[:sales])
-          Sale.transaction do
-            new_sales.each do |new_sale|
-              item = Item.find_by_barcode(new_sale.barcode)
-              Sale.create(:count => new_sale.quantity, :price => new_sale.price, :date => new_sale.date, :shop_id => params[:id], :item_id => item.id)
-            end
-          end
-        rescue
-          render :json => {:success => false}, status: 422
-          return
+    begin
+      params.require(:sales, :id)
+      new_sales = ActiveSupport::JSON.decode(params[:sales])
+      Sale.transaction do
+        new_sales.each do |new_sale|
+          item = Item.find_by_barcode(new_sale.barcode)
+          Sale.create(:count => new_sale.quantity, :price => new_sale.price, :date => new_sale.date, :shop_id => params[:id], :item_id => item.id)
         end
-        render :json => {:success => true}, status: :ok
       end
+    rescue
+      render :json => {:success => false}, status: 422
+    else
+      render :json => {:success => true}, status: :ok
     end
   end
 
