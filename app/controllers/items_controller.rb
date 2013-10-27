@@ -1,4 +1,5 @@
 class ItemsController < ApplicationController
+  skip_before_action :verify_authenticity_token, only: [:sync]
   layout false, :only => [:edit]
   
   def index
@@ -20,16 +21,16 @@ class ItemsController < ApplicationController
 
   def sync
     begin      
-      shop = Shop.find_by_s_id(params[:s_id])
-      items = ActiveSupport::JSON.decode(params[:shop_items])
-      items.each do |item|
-        new_price = active_pricing(item.barcode, item.current_stock)
-        shop_item = shop.shop_items.find_or_initialize_by_barcode(item.barcode)
-        shop_item.update_attributes(:current_stock => shop_item.current_stock, :selling_price => new_price)
+      shop = Shop.find_by_s_id(params[:id])
+      params[:shop_items].each do |item|
+        item_data = Item.find_by_barcode!(item[:barcode])
+        shop_item = shop.shop_items.find_or_initialize_by_item_id(item_data.id)
+        new_price = active_pricing(item_data, item[:current_stock])
+        shop_item.update_attributes(:current_stock => item[:current_stock], :selling_price => new_price)
       end
-      updated_items = shop.shop_items.include(:item).all()          
+      updated_items = shop.shop_items.includes(:item).all      
     rescue => e
-      render :json => {:success => false, :errors => e.messages}, status: 422
+      render :json => {:success => false, :errors => e.message}, status: 422
     else
       render :json => {:success => true, :shop_items => updated_items.to_json}, status: :ok
     end    
@@ -61,9 +62,9 @@ class ItemsController < ApplicationController
     params.permit(:barcode, :product_name, :manufacturer, :category, :cost_price, :bundle_unit, :minimum_stock)
   end
 
-  def active_pricing (barcode, current_stock)
-    item = Item.find_by_barcode(barcode)
+  def active_pricing (item, current_stock)
     base_profit = item.cost_price * 2 # TODO: allow control of this constant by admin
-    new_price = base_profit * ((item.minimum_stock / current_stock) + 0.5) + item.cost_price
+    #new_price = base_profit * ((item.minimum_stock / current_stock) + 0.5) + item.cost_price
+    new_price = base_profit + item.cost_price
   end
 end
