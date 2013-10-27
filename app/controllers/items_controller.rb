@@ -24,15 +24,18 @@ class ItemsController < ApplicationController
       shop = Shop.find_by_s_id(params[:id])
       params[:shop_items].each do |item|
         item_data = Item.find_by_barcode!(item[:barcode])
-        shop_item = shop.shop_items.find_or_initialize_by_item_id(item_data.id)
+        shop_item = shop.shop_items.find_or_initialize_by(item_id: item_data.id)
         new_price = active_pricing(item_data, item[:current_stock])
         shop_item.update_attributes(:current_stock => item[:current_stock], :selling_price => new_price)
       end
-      updated_items = shop.shop_items.includes(:item).all      
+      updated_items = shop.shop_items.load     
     rescue => e
       render :json => {:success => false, :errors => e.message}, status: 422
     else
-      render :json => {:success => true, :shop_items => updated_items.to_json}, status: :ok
+      render :json => {:success => true, :shop_items => updated_items.as_json(
+        :except => [:created_at, :updated_at],
+        :include => {:item => { :except => [:created_at, :updated_at, :deleted_at]}}
+        )}, status: :ok
     end    
   end
   
@@ -67,4 +70,5 @@ class ItemsController < ApplicationController
     #new_price = base_profit * ((item.minimum_stock / current_stock) + 0.5) + item.cost_price
     new_price = base_profit + item.cost_price
   end
+  
 end
