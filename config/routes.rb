@@ -5,6 +5,7 @@ HqServer::Application.routes.draw do
   get 'sales', to: 'sales#index'
   get 'sales/all', to: 'sales#all'
   get 'sales/stats/:id', to: 'sales#stats', as: 'sales_stats'
+  post 'sales/:id', to: 'sales#create'
   resources :home
   resources :admin
   resources :items, :path => 'products'
