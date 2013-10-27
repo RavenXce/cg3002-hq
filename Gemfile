@@ -47,6 +47,6 @@ end
 
 gem 'country-select'
 gem 'chosen-rails'
-gem 'jquery-datatables-rails', github: 'rweng/jquery-datatables-rails'
+gem "jquery-datatables-rails", "~> 1.11.2"
 gem 'will_paginate'
 gem 'soft_deletion'
