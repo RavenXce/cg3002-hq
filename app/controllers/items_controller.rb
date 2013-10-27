@@ -33,8 +33,8 @@ class ItemsController < ApplicationController
       render :json => {:success => false, :errors => e.message}, status: 422
     else
       render :json => {:success => true, :shop_items => updated_items.as_json(
-        :except => [:created_at, :updated_at],
-        :include => {:item => { :except => [:created_at, :updated_at, :deleted_at]}}
+        :only => [:current_stock, :selling_price],
+        :include => {:item => { :except => [:created_at, :updated_at, :deleted_at, :id]}}
         )}, status: :ok
     end    
   end
