@@ -6,11 +6,10 @@ class SalesController < ApplicationController
   def create
     begin
       params.require(:sales, :id)
-      new_sales = ActiveSupport::JSON.decode(params[:sales])
       Sale.transaction do
-        new_sales.each do |new_sale|
+        params[:sales].each do |new_sale|
           item = Item.find_by_barcode(new_sale.barcode)
-          Sale.create(:count => new_sale.quantity, :price => new_sale.price, :date => new_sale.date, :shop_id => params[:id], :item_id => item.id)
+          Sale.create(:count => new_sale[:quantity], :price => new_sale[:price], :date => new_sale[:date], :shop_id => params[:id], :item_id => item.id)
         end
       end
     rescue
