@@ -6,10 +6,12 @@ HqServer::Application.routes.draw do
   get 'sales', to: 'sales#index'
   get 'sales/all', to: 'sales#all'
   get 'sales/stats/:id', to: 'sales#stats', as: 'sales_stats'
+  post 'shop_items/batch_add', to: 'shop_items#batch_add'
   resources :home
   resources :admin
   resources :items, :path => 'products'
   resources :shops, :path => 'stores'
+  #resources :shop_items
   #resources :sales
   resources :deliveries
   root 'home#index', as: :default

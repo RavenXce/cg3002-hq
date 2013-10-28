@@ -127,26 +127,33 @@
 <!-- START MODAL FORM EDIT -->
 <div id="modal-form-edit-item" class="modal smaller" tabindex="-1"></div>
 <!-- END MODAL FORM EDIT -->
+
+<!-- START ADD SHOP ITEM DIALOG MESSAGE -->
 <div id="dialog-message" class="hide">
-	<div class="space-4"></div>
-	<p>
-		Select the stores that should carry this item.
-	</p>
-	<div class="hr hr-12 hr-double"></div>
-	<div>
-		<div class="form-group">
-			<label for="form-field-shop-id-tags"> Select Stores &nbsp; </label>
-			<div class="inline">
-				<input type="text" name="tags" id="form-field-shop-id-tags" value="" placeholder="Enter Shop IDs ..." />
+	<form id="form-batch-add" action="<%= shop_items_batch_add_path%>" method="post">
+		<%= tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token) %>
+		<%= hidden_field_tag 'item_ids' %>
+		<div class="space-4"></div>
+		<p>
+			Select the stores that should carry this item.
+		</p>
+		<div class="hr hr-12 hr-double"></div>
+		<label for="add-all-stores-btn"> All Stores
+			<input name="all_shops" id="add-all-stores-btn" type="checkbox" class="ace ace-switch ace-switch-5">
+			<span class="lbl"></span> </label>
+		<div class="space-4"></div>
+		<div>
+			<div class="form-group" id="form-group-tags">
+				<label for="form-field-shop-id-tags"> Select Stores &nbsp; </label>
+				<div class="inline">
+					<input type="text" name="shop_ids" id="form-field-shop-id-tags" value="" placeholder="Enter Shop IDs ..." />
+				</div>
 			</div>
 		</div>
-	</div>
-	<div class="space-4"></div>
-	<label for="add-all-stores-btn"> All Stores
-		<input id="add-all-stores-btn" type="checkbox" class="ace ace-switch ace-switch-5">
-		<span class="lbl"></span> </label>
-	<div class="hr hr-12 hr-double"></div>
-	<p>
-		Currently <b>X</b> stores carry this item.
-	</p>
-</div><!-- #dialog-message -->
+		<div class="hr hr-12 hr-double"></div>
+		<p>
+			Currently <b>X</b> stores carry all of these items.
+		</p>
+	</form>
+</div>
+<!-- END ADD SHOP ITEM DIALOG MESSAGE -->

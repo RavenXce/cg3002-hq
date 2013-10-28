@@ -36,7 +36,7 @@ class ShopsController < ApplicationController
     @shops = Shop.all
     render :index
   end
-
+  
   private
 
   def create_params

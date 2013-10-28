@@ -28,4 +28,20 @@ $(document).on('ready page:load', function() {
 			class_name : 'gritter-error'
 		});
 	}
+	if ( typeof PAGE_MESSAGES != 'undefined') {
+		$.gritter.add({
+			title : 'Status',
+			text : PAGE_MESSAGES + ".",
+			sticky: false,
+			class_name : 'gritter-success'
+		});
+	}
+	if ( typeof PAGE_WARNINGS != 'undefined') {
+		$.gritter.add({
+			title : 'Warning',
+			text : PAGE_WARNINGS + ".",
+			sticky: false,
+			class_name : 'gritter-warning'
+		});
+	}
 });

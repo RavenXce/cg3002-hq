@@ -59,6 +59,9 @@ $(document).on('ready page:load', function() {
 					}
 				});
 			});
+			$('#add-all-stores-btn').on('change', function(){
+				$(this).prop('checked') ? $('#form-group-tags').hide() : $('#form-group-tags').show();
+			});
 			$('#add-shop-items-btn').on(ace.click_event, function(e) {
 				e.preventDefault();
 				var dialog = $("#dialog-message").removeClass('hide').dialog({
@@ -77,7 +80,16 @@ $(document).on('ready page:load', function() {
 						"class" : "btn btn-primary btn-xs",
 						click : function() {
 							$(this).dialog("close");
-							// TODO: Create shop items using shop controller
+							$form = $('#form-batch-add');
+							item_ids = [];
+							$('#all-items-table').find('tr:gt(0)').each(function(){
+								$this = $(this);
+								if ($this.find('td:first-child input:checkbox').prop('checked') === true) {
+									item_ids.push($this.data('id'));
+								}								
+							});
+							$form.find('#item_ids').val(item_ids.join(', '));
+							$form.submit();
 						}
 					}]
 				});
