@@ -7,12 +7,12 @@ class SalesController < ApplicationController
   def create
     begin
       params.require(:sales)
-      Sale.transaction do
-        params[:sales].each do |sale|
-          item = Item.find_by_barcode(sale[:barcode])
-          Sale.create(:count => sale[:quantity], :price => sale[:price], :date => sale[:date], :shop_id => params[:id], :item_id => item.id)
-        end
+      sales = []
+      params[:sales].each do |sale|
+        item = Item.find_by_barcode(sale[:barcode])
+        sales << Sale.new(:count => sale[:quantity], :price => sale[:price], :date => sale[:date], :shop_id => params[:id], :item_id => item.id)
       end
+      Sale.import sales
     rescue
       render :json => {:success => false}, status: 422
     else
@@ -34,7 +34,7 @@ class SalesController < ApplicationController
       render :index
     return
     end
-
+    # TODO: Do batch import
     data_lines = params[:transactions].read.lines.map(&:chomp)
     data_lines.each do |transaction|
       tdetails = transaction.split(':')

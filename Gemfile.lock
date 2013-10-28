@@ -19,6 +19,8 @@ GEM
       activesupport (= 4.0.0)
       arel (~> 4.0.0)
     activerecord-deprecated_finders (1.0.3)
+    activerecord-import (0.4.1)
+      activerecord (>= 3.0)
     activesupport (4.0.0)
       i18n (~> 0.6, >= 0.6.4)
       minitest (~> 4.2)
@@ -71,6 +73,7 @@ GEM
     mime-types (1.25)
     minitest (4.7.5)
     multi_json (1.8.2)
+    mysql2 (0.3.11)
     mysql2 (0.3.11-x86-mingw32)
     polyglot (0.3.3)
     rack (1.5.2)
@@ -129,6 +132,7 @@ PLATFORMS
   x86-mingw32
 
 DEPENDENCIES
+  activerecord-import (~> 0.4.1)
   chosen-rails
   coffee-rails (~> 4.0.0)
   country-select
