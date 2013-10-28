@@ -128,11 +128,25 @@
 <div id="modal-form-edit-item" class="modal smaller" tabindex="-1"></div>
 <!-- END MODAL FORM EDIT -->
 <div id="dialog-message" class="hide">
+	<div class="space-4"></div>
 	<p>
-		This is the default dialog which is useful for displaying information. The dialog window can be moved, resized and closed with the 'x' icon.
+		Select the stores that should carry this item.
 	</p>
 	<div class="hr hr-12 hr-double"></div>
+	<div>
+		<div class="form-group">
+			<label for="form-field-shop-id-tags"> Select Stores &nbsp; </label>
+			<div class="inline">
+				<input type="text" name="tags" id="form-field-shop-id-tags" value="" placeholder="Enter Shop IDs ..." />
+			</div>
+		</div>
+	</div>
+	<div class="space-4"></div>
+	<label for="add-all-stores-btn"> All Stores
+		<input id="add-all-stores-btn" type="checkbox" class="ace ace-switch ace-switch-5">
+		<span class="lbl"></span> </label>
+	<div class="hr hr-12 hr-double"></div>
 	<p>
-		Currently using <b>36% of your storage space</b>.
+		Currently <b>X</b> stores carry this item.
 	</p>
 </div><!-- #dialog-message -->
