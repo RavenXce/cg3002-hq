@@ -13,9 +13,9 @@ class SalesController < ApplicationController
           Sale.create(:count => sale[:quantity], :price => sale[:price], :date => sale[:date], :shop_id => params[:id], :item_id => item.id)
         end
       end
-    #rescue
-    #  render :json => {:success => false}, status: 422
-    #else
+    rescue
+      render :json => {:success => false}, status: 422
+    else
       render :json => {:success => true}, status: :ok
     end
   end
