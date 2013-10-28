@@ -20,7 +20,8 @@ class ItemsController < ApplicationController
   end
 
   def sync
-    begin      
+    begin
+      params.require(:shop_items)
       shop = Shop.find_by_s_id(params[:id])
       params[:shop_items].each do |item|
         item_data = Item.find_by_barcode!(item[:barcode])

@@ -1,20 +1,21 @@
 class SalesController < ApplicationController
-  before_filter :get_shops
+  skip_before_action :verify_authenticity_token, only: [:create]
+  before_filter :get_shops, except: [:create]
   def index
   end
 
   def create
     begin
-      params.require(:sales, :id)
+      params.require(:sales)
       Sale.transaction do
         params[:sales].each do |sale|
-          item = Item.find_by_barcode(sale.barcode)
+          item = Item.find_by_barcode(sale[:barcode])
           Sale.create(:count => sale[:quantity], :price => sale[:price], :date => sale[:date], :shop_id => params[:id], :item_id => item.id)
         end
       end
-    rescue
-      render :json => {:success => false}, status: 422
-    else
+    #rescue
+    #  render :json => {:success => false}, status: 422
+    #else
       render :json => {:success => true}, status: :ok
     end
   end
