@@ -23,7 +23,10 @@ $(document).on('ready page:load', function() {
 			$(nRow).data('id', aData[8]);
 		},
 		fnDrawCallback : function() {// Injection to modify DOM
-			$('.dataTables_actions').html('<a href="#modal-form-add-item" data-rel="tooltip" data-toggle="modal" title="Add a new product"><i class="icon-plus-sign purple bigger-130"></i></a>' + '<a href="#" data-rel="tooltip" title="Batch update products"><i class="icon-pencil blue bigger-130"></i></a>' + '<a href="#" data-rel="tooltip" title="Add products to stores"><i class="icon-zoom-in grey bigger-130"></i></a>' + '<a href="#" class="tooltip-error" data-rel="tooltip" title="Batch removal"><i class="icon-trash red bigger-130"></i></a>');
+			$('.dataTables_actions').html('<a href="#modal-form-add-item" data-rel="tooltip" data-toggle="modal" title="Add a new product"><i class="icon-plus-sign purple bigger-130"></i></a>' 
+			+ '<a href="#" data-rel="tooltip" title="Batch update products"><i class="icon-pencil blue bigger-130"></i></a>'
+			+ '<a href="#" id="add-shop-items-btn" data-rel="tooltip" title="Add products to stores"><i class="icon-zoom-in grey bigger-130"></i></a>'
+			+ '<a href="#" class="tooltip-error" data-rel="tooltip" title="Batch removal"><i class="icon-trash red bigger-130"></i></a>');
 			$('[data-rel=tooltip]').tooltip();
 			$('.edit-item').on(ace.click_event, function() {
 				$('#modal-form-edit-item').load('/products/'+$(this).parents('tr').data('id')+'/edit');
@@ -57,6 +60,30 @@ $(document).on('ready page:load', function() {
 							"className" : "btn-sm"
 						}
 					}
+				});
+			});	
+			$('#add-shop-items-btn').on(ace.click_event, function(e) {
+				e.preventDefault();
+				var dialog = $( "#dialog-message" ).removeClass('hide').dialog({
+					modal: true,
+					title: '<div class="widget-header widget-header-small"><h4 class="smaller"><i class="icon-ok"></i> jQuery UI Dialog</h4></div>',
+					title_html: true,
+					buttons: [ 
+						{
+							text: "Cancel",
+							"class" : "btn btn-xs",
+							click: function() {
+								$( this ).dialog( "close" ); 
+							} 
+						},
+						{
+							text: "OK",
+							"class" : "btn btn-primary btn-xs",
+							click: function() {
+								$( this ).dialog( "close" ); 
+							} 
+						}
+					]
 				});
 			});
 		}
