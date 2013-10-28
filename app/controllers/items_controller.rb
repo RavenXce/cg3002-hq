@@ -29,12 +29,13 @@ class ItemsController < ApplicationController
           if shop_item[:barcode] == db_item.item[:barcode].to_i then
             db_item.current_stock = shop_item[:current_stock]
             db_item.selling_price = active_pricing(db_item.item, shop_item[:current_stock])
+            db_item.updated_at = DateTime.now 
             updated_items << db_item
             next
           end
         end
       end
-      ShopItem.import updated_items
+      ShopItem.import updated_items, :on_duplicate_key_update=> [ :current_stock, :selling_price, :updated_at ]
       updated_items = shop.shop_items.includes(:item).load
     rescue => e
       render :json => {:success => false, :errors => e.message}, status: 422
