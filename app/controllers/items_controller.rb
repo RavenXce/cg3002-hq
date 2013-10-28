@@ -23,16 +23,19 @@ class ItemsController < ApplicationController
     begin
       params.require(:shop_items)
       shop = Shop.find_by_s_id(params[:id])
-      shop_items = []
-      params[:shop_items].each do |item|
-        item_data = Item.find_by_barcode!(item[:barcode])
-        shop_item = shop.shop_items.find_or_initialize_by(:item_id => item_data.id)
-        shop_item.current_stock = item[:current_stock]
-        shop_item.selling_price = active_pricing(item_data, item[:current_stock])
-        shop_items << shop_item
+      updated_items = []
+      shop.shop_items.includes(:item).find_each do |db_item|
+        params[:shop_items].each do |shop_item|
+          if shop_item[:barcode] = db_item[:barcode] then
+            db_item.current_stock = shop_item[:current_stock]
+            db_item.selling_price = active_pricing(db_item, shop_item[:current_stock])
+            updated_items << db_item
+            next
+          end
+        end
       end
-      ShopItem.import shop_items
-      updated_items = shop.shop_items.load
+      ShopItem.import updated_items
+      updated_items = shop.shop_items.includes(:item).load
     rescue => e
       render :json => {:success => false, :errors => e.message}, status: 422
     else
