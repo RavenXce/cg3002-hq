@@ -1,4 +1,7 @@
 class ShopItemsController < ApplicationController
+  
+  # TODO: enable all switch.
+  # TODO: change shop id to a string (like barcode). length of 6! 
   def batch_add
 
     if params[:item_ids].empty? || params[:shop_ids].empty? then
