@@ -26,9 +26,9 @@ class ItemsController < ApplicationController
       updated_items = []
       shop.shop_items.includes(:item).find_each do |db_item|
         params[:shop_items].each do |shop_item|
-          if shop_item[:barcode] = db_item[:barcode] then
+          if shop_item[:barcode] == db_item.item[:barcode].to_i then
             db_item.current_stock = shop_item[:current_stock]
-            db_item.selling_price = active_pricing(db_item, shop_item[:current_stock])
+            db_item.selling_price = active_pricing(db_item.item, shop_item[:current_stock])
             updated_items << db_item
             next
           end
