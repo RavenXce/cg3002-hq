@@ -74,7 +74,7 @@ class ItemsController < ApplicationController
   end
 
   def active_pricing (item, current_stock)
-    base_profit = item[:cost_price] * 2 # TODO: allow control of this constant by admin
+    base_profit = item[:cost_price] * 2 * (item[:minimum_stock] / current_stock + 10) # TODO: allow control of this constant by admin
     #new_price = base_profit * ((item.minimum_stock / current_stock) + 0.5) + item.cost_price
     new_price = base_profit + item[:cost_price]
   end
