@@ -32,7 +32,7 @@
 				</div>
 			</div>
 		</div>
-		<% if !login_page?%>
+		<% if !login_page? then %>
 		<div class="main-container container" id="main-container">
 			<div class="main-container-inner">
 				<a class="menu-toggler" id="menu-toggler" href="#"> <span class="menu-text"></span> </a>
@@ -156,8 +156,12 @@
 				</div>
 			</div>
 			<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse"> <i class="icon-double-angle-up icon-only bigger-110"></i> </a>
+			<% else # for login page 
+			%>
+			<div class="container">
+				<%= yield %>
+			</div>
 			<% end %>
-			<% else yield %>
 			<%= javascript_tag "var PAGE_ERRORS = #{raw flash.alert.to_json};" if flash[:alert] %>
 			<%= javascript_tag "var PAGE_WARNINGS = #{raw flash[:warning].to_json};" if flash[:warning] %>
 			<%= javascript_tag "var PAGE_MESSAGES = #{raw flash.notice.to_json};" if flash[:notice] %>
