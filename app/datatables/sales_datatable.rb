@@ -18,13 +18,15 @@ private
 
   def data
     sales.map do |sale| #XXX: Move standardized HTML to client-side view through jQuery DOM injection!
+      puts sale.inspect
       [
         '<td class="center"><label>
               <input type="checkbox" class="ace" />
               <span class="lbl"></span></label>
          </td>',
         sale.date.strftime("%b %e, %Y"),
-        '<a href="#">'+"%05d" % sale.shop.s_id.to_s+'</a>',
+        sale.shop.nil? ? 'OLD (' + "%05d" % sale.shop_id.to_s + ')' :
+        '<a href="#">'+ "%05d" % sale.shop.s_id.to_s+'</a>',
         '<a href="#">'+sale.item.product_name+'</a>',
         '<a href="#">'+sale.item.barcode+'</a>',
         sale.count,

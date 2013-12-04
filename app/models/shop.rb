@@ -1,6 +1,6 @@
 class Shop < ActiveRecord::Base
-  has_many :sales
-  has_many :shop_items
+  has_many :sales, :inverse_of => :shop
+  has_many :shop_items, :inverse_of => :shop
   has_many :items, through: :shop_items
   
   validates :s_id, uniqueness: true
