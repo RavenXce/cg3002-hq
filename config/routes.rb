@@ -15,7 +15,7 @@ HqServer::Application.routes.draw do
   #resources :shop_items
   #resources :sales
   resources :deliveries
-  root 'sessions#new', as: :default
+  root 'sessions#new'
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -12,10 +12,11 @@
 				<div class="navbar-header pull-left">
 					<a href="#" class="navbar-brand"> <small> <i class="icon-leaf"></i> JR is Gay Inc. </small> </a>
 				</div>
+				<% if logged_in? then %>
 				<div class="navbar-header pull-right">
 					<ul class="nav ace-nav">
 						<li class="light-blue">
-							<a data-toggle="dropdown" href="#" class="dropdown-toggle"> <img class="nav-user-photo" src="<%= image_url("avatar2.png")%>" alt="User's Photo"> <span class="user-info"> <small>Welcome,</small> JR </span> <i class="icon-caret-down"></i> </a>
+							<a data-toggle="dropdown" href="#" class="dropdown-toggle"> <img class="nav-user-photo" src="<%= image_url("avatar2.png")%>" alt="User's Photo"> <span class="user-info"> <small>Welcome,</small> <%= current_user.name%> </span> <i class="icon-caret-down"></i> </a>
 							<ul class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
 								<li>
 									<a href="#"> <i class="icon-cog"></i> Settings </a>
@@ -25,11 +26,12 @@
 								</li>
 								<li class="divider"></li>
 								<li>
-									<a href="#"> <i class="icon-off"></i> Logout </a>
+									<%= link_to raw(' <i class="icon-off"></i> Logout '), { controller: "sessions", action: :destroy, id: current_user.id }, method: :delete%>
 								</li>
 							</ul>
 						</li>
 				</div>
+				<% end %>
 			</div>
 		</div>
 		<% if !login_page? then %>

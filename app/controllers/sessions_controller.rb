@@ -1,12 +1,18 @@
-class SessionsController < ApplicationController
+class SessionsController < ApplicationController  
+  skip_before_filter :authenticate_user
+  
   def new
+    if logged_in?
+      redirect_to home_index_url
+    end
   end
   
   def create
-    admin = Admin.authenticate(params[:email], params[:password])
-    if user
+    admin = Admin.authenticate(params[:login_code], params[:password])
+    if admin
+      reset_session
       session[:admin_id] = admin.id
-      redirect_to root_url, :notice => "Logged in!"
+      redirect_to home_index_url, :notice => "Logged in successfully"
     else
       flash.now.alert = "Invalid email or password"
       render "new"
@@ -15,6 +21,6 @@ class SessionsController < ApplicationController
   
   def destroy
     session[:admin_id] = nil
-    redirect_to root_url, :notice => "Logged out!"
+    redirect_to root_url, :notice => "Logged out successfuly"
   end
 end
