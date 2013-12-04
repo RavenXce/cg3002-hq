@@ -32,6 +32,7 @@
 				</div>
 			</div>
 		</div>
+		<% if !login_page?%>
 		<div class="main-container container" id="main-container">
 			<div class="main-container-inner">
 				<a class="menu-toggler" id="menu-toggler" href="#"> <span class="menu-text"></span> </a>
@@ -60,7 +61,7 @@
 					</div>
 					<ul class="nav nav-list">
 						<li
-						<% if current_page?(:controller=>'home') || current_page?(:default)%>
+						<% if current_page?(:controller=>'home')%>
 							class="active"<%end%>>
 							<a href="<%= home_index_path%>"> <i class="icon-dashboard"></i> <span class="menu-text"> Dashboard </span> </a>
 						</li>
@@ -100,8 +101,8 @@
 							<a href="calendar"> <i class="icon-calendar"></i> <span class="menu-text"> Calendar </span> </a>
 						</li>
 						<li
-						<% if current_page?(:controller=>'admin')%>
-							class="active"<%end%>> <a href="<%= admin_index_path%>"> <i class="icon-cog"></i> <span class="menu-text"> Admin </span> </a>
+						<% if current_page?(:controller=>'admins')%>
+							class="active"<%end%>> <a href="<%= admins_path%>"> <i class="icon-cog"></i> <span class="menu-text"> Admin </span> </a>
 						</li>
 					</ul>
 					<div class="sidebar-collapse" id="sidebar-collapse">
@@ -155,9 +156,11 @@
 				</div>
 			</div>
 			<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse"> <i class="icon-double-angle-up icon-only bigger-110"></i> </a>
-			<%= javascript_tag "var PAGE_ERRORS = #{raw @errors.to_json};" if defined? @errors %>
-			<%= javascript_tag "var PAGE_WARNINGS = #{raw @warnings.to_json};" if defined? @warnings %>
-			<%= javascript_tag "var PAGE_MESSAGES = #{raw @messages.to_json};" if defined? @messages %>
+			<% end %>
+			<% else yield %>
+			<%= javascript_tag "var PAGE_ERRORS = #{raw flash.alert.to_json};" if flash[:alert] %>
+			<%= javascript_tag "var PAGE_WARNINGS = #{raw flash[:warning].to_json};" if flash[:warning] %>
+			<%= javascript_tag "var PAGE_MESSAGES = #{raw flash.notice.to_json};" if flash[:notice] %>
 			<%= javascript_tag "var AUTH_TOKEN = #{form_authenticity_token.inspect};" if protect_against_forgery? %>
 		</div>
 	</body>

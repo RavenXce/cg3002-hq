@@ -1,5 +1,5 @@
-class AdminController < ApplicationController
-  def item_dump
+class AdminsController < ApplicationController
+  def item_dump # XXX: move to items controller
     items = []
     stock = []
     item_lines = params[:items].lines.map(&:chomp)

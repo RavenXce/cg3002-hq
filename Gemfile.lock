@@ -29,6 +29,7 @@ GEM
       tzinfo (~> 0.3.37)
     arel (4.0.0)
     atomic (1.1.14)
+    bcrypt-ruby (3.0.1-x86-mingw32)
     builder (3.1.4)
     chosen-rails (1.0.1)
       coffee-rails (>= 3.2)
@@ -132,6 +133,7 @@ PLATFORMS
 
 DEPENDENCIES
   activerecord-import (~> 0.4.1)
+  bcrypt-ruby
   chosen-rails
   coffee-rails (~> 4.0.0)
   country-select

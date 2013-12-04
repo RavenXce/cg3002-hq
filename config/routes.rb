@@ -8,13 +8,15 @@ HqServer::Application.routes.draw do
   get 'sales/stats/:id', to: 'sales#stats', as: 'sales_stats'
   post 'shop_items/batch_add', to: 'shop_items#batch_add'
   resources :home
-  resources :admin
+  resources :admins
+  resources :sessions
   resources :items, :path => 'products'
   resources :shops, :path => 'stores'
   #resources :shop_items
   #resources :sales
   resources :deliveries
-  root 'home#index', as: :default
+  root 'sessions#new', as: :default
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

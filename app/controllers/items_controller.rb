@@ -14,7 +14,7 @@ class ItemsController < ApplicationController
     begin
       item.save!
     rescue => e
-      @errors = e.message
+      flash.now.alert = e.message
     end
     render :index
   end

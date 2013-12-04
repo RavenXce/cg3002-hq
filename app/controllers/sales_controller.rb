@@ -22,7 +22,7 @@ class SalesController < ApplicationController
 
   def transaction_dump
     if !(params.has_key?(:transactions) && params.has_key?(:shop_id)) then
-      @errors = "Invalid parameters"
+      flash.now.alert = "Invalid parameters"
       render :index
     return
     end
@@ -30,7 +30,7 @@ class SalesController < ApplicationController
     # txt
     shop = Shop.find(params[:shop_id]);
     if shop.nil?
-      @errors = "Invalid shop ID: " + params[:shop_id]
+      flash.now.alert = "Invalid shop ID: " + params[:shop_id]
       render :index
     return
     end
@@ -40,7 +40,7 @@ class SalesController < ApplicationController
       tdetails = transaction.split(':')
       item = Item.find_by_barcode(tdetails[3])
       if item.nil?
-        @errors = "Invalid item barcode: " + tdetails[3]
+        flash.now.alert = "Invalid item barcode: " + tdetails[3]
         render :index
       return
       end

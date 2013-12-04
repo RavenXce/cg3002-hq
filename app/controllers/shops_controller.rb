@@ -1,5 +1,6 @@
 class ShopsController < ApplicationController
   layout false, :only => [:edit]
+  
   def index
     @shops = Shop.all
   end
@@ -9,10 +10,9 @@ class ShopsController < ApplicationController
     begin
       shop.save!
     rescue => e
-      @errors = e.message
+      flash.alert = e.message
     end
-    @shops = Shop.all
-    render :index
+    redirect_to :index
   end
 
   def destroy
@@ -33,8 +33,7 @@ class ShopsController < ApplicationController
   def update
     shop = Shop.find(params[:id])
     shop.update(edit_params)
-    @shops = Shop.all
-    render :index
+    redirect_to :index
   end
   
   private
