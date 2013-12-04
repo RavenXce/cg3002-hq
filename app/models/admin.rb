@@ -1,6 +1,4 @@
-class Admin < ActiveRecord::Base
-  attr_accessible :login_code, :password, :password_confirmation
-  
+class Admin < ActiveRecord::Base  
   attr_accessor :password
   before_save :encrypt_password
   

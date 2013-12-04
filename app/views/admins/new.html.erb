@@ -1,0 +1,39 @@
+<%
+  @page_header = "Admin"
+  @page_sub_header = "Create new admin"
+  @breadcrumbs = [["Admin", admins_path], "Create"]
+%>
+
+<%= form_for @admin, :html => { :class => 'form-horizontal'} do |f| %>
+	<div class="form-group">
+		<%= f.label :login_code, 'User ID', {:class => 'col-sm-2 control-label'} %>
+		<div class="col-sm-9">
+			<%= f.text_field :login_code, :class => 'form-control', :placeholder => 'gayjr01' %>
+		</div>
+	</div>
+	<div class="form-group">
+		<%= f.label :name, 'Staff Name', {:class => 'col-sm-2 control-label'} %>
+		<div class="col-sm-9">
+			<%= f.text_field :name, :class => 'form-control', :placeholder => 'Lim Jia Rong' %>
+		</div>
+	</div>
+	<div class="form-group">
+		<%= f.label :password, nil, :class => 'col-sm-2 control-label'  %>
+		<div class="col-sm-9">
+			<%= f.password_field :password, :class => 'form-control', :placeholder => 'Password' %>
+		</div>
+	</div>
+	<div class="form-group">
+		<%= f.label :password_confirmation, 'Confirm Password', :class => 'col-sm-2 control-label' %>
+		<div class="col-sm-9">
+			<%= f.password_field :password_confirmation, :class => 'form-control', :placeholder => 'Confirm Password' %>
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="col-sm-offset-2 col-sm-10">
+			<button type="submit" class="btn btn-primary">
+				Create
+			</button>
+		</div>
+	</div>
+<% end %>

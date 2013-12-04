@@ -1,4 +1,20 @@
 class AdminsController < ApplicationController
+  
+  def new
+    @admin ||= Admin.new
+  end
+  
+  def create
+    @admin = Admin.new(admin_params)
+    begin
+      @admin.save!
+    rescue => e
+      flash.now.alert = e.message
+      render :new and return
+    end
+    redirect_to admins_url, :notice => "Succesfully added admin: " + @admin.login_code
+  end
+
   def item_dump # XXX: move to items controller
     items = []
     stock = []
@@ -25,4 +41,11 @@ class AdminsController < ApplicationController
     end
     redirect_to '/admin'
   end
+  
+  private
+
+  def admin_params
+    params.require(:admin).permit(:login_code, :name, :password)
+  end
+  
 end

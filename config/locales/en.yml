@@ -27,3 +27,9 @@ en:
     attributes:
       shop:
         s_id: "Shop ID"
+        
+en:
+  activerecord:
+    attributes:
+      admin:
+        login_code: "User ID"
