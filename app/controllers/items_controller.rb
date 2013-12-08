@@ -21,11 +21,10 @@ class ItemsController < ApplicationController
   end
 
   def sync
-    begin
       params.require(:shop_items)
       shop = Shop.find_by_s_id(params[:id])
       params[:shop_items].each do |shop_item|
-        db_item = shop.shop_items.includes(:item).find_by_barcode(shop_item[:barcode]).first
+        db_item = shop.shop_items.includes(:item).where(:barcode => shop_item[:barcode]).first
         if !db_item.nil? then
           db_item.current_stock = shop_item[:current_stock]
           db_item.updated_at = DateTime.now
@@ -33,14 +32,10 @@ class ItemsController < ApplicationController
       end
       ShopItem.import updated_items, :on_duplicate_key_update => [ :current_stock, :updated_at ]
       updated_items = shop.shop_items.includes(:item).all
-    rescue => e
-      render :json => {:success => false, :errors => e.message}, status: 422
-    else
       render :json => {:success => true, :shop_items => updated_items.as_json(
         :only => [:current_stock, :selling_price],
         :include => {:item => { :except => [:created_at, :updated_at, :deleted_at, :id]}}
         )}, status: :ok
-    end    
   end
   
   def edit

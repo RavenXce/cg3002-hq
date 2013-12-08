@@ -82,9 +82,9 @@ class SalesController < ApplicationController
   SALES_PROFIT_RATIO = 2.00
   
   def active_pricing (shop_item, sales)
-    base_profit = shop_item.item[:cost_price] * BASE_PROFIT_RATIO
-    adjusted_profit = base_profit * (MINIMUM_PROFIT_RATIO + ((sales.to_f / shop_item[:minimum_stock]) * SALES_PROFIT_RATIO))
-    shop_item[:selling_price] = adjusted_profit + shop_item.item[:cost_price]
+    base_profit = shop_item.item.cost_price * BASE_PROFIT_RATIO
+    adjusted_profit = base_profit * (MINIMUM_PROFIT_RATIO + ((sales.to_f / shop_item.minimum_stock) * SALES_PROFIT_RATIO))
+    shop_item.selling_price = adjusted_profit + shop_item.item.cost_price
     shop_item
   end
 
