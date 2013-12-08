@@ -24,7 +24,8 @@ class ItemsController < ApplicationController
       params.require(:shop_items)
       shop = Shop.find_by_s_id(params[:id])
       params[:shop_items].each do |shop_item|
-        db_item = shop.shop_items.includes(:item).where(:barcode => shop_item[:barcode]).first
+        item = item.find_by_barcode(shop_item[:barcode])
+        db_item = shop.shop_items.includes(:item).where("items.barcode" => shop_item[:barcode]).first
         if !db_item.nil? then
           db_item.current_stock = shop_item[:current_stock]
           db_item.updated_at = DateTime.now

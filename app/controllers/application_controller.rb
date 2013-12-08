@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
   def authenticate_user
     if !logged_in?
       flash.alert = "Unauthorized Access"
-      redirect_to session_url
+      redirect_to root_url
     end
   end
 

@@ -13,7 +13,7 @@ class SalesController < ApplicationController
       updated_items = []
       params[:sales].each do |sale|
         item = Item.find_by_barcode(sale[:barcode])
-        shop_item = shop.shop_items.find_by_barcode(sale[:barcode]).first
+        shop_item = shop.shop_items.where(:item_id => item.id)
         updated_items << active_pricing(shop_item, sale[:quantity])
         sales << Sale.new(:count => sale[:quantity], :price => sale[:price], :date => sale[:date], :shop_id => params[:id], :item_id => item.id)
       end

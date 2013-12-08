@@ -14,8 +14,8 @@ class SessionsController < ApplicationController
       session[:admin_id] = admin.id
       redirect_to home_index_url, :notice => "Logged in successfully"
     else
-      flash.now.alert = "Invalid email or password"
-      render "new"
+      flash.alert = "Invalid email or password"
+      redirect_to root_url
     end
   end
   
