@@ -23,7 +23,7 @@ class DeliveriesDatatable
               <input type="checkbox" class="ace" />
               <span class="lbl"></span></label>
          </td>',
-        delivery.id.to_s,
+        '<a href="deliveries/'+delivery.id.to_s+'">'+delivery.id.to_s+'</a>',
         '<a href="#">'+ "%05d" % delivery.shop.s_id.to_s+'</a>', #TODO: link to shop products/stats page
         delivery.shop.country,
         delivery.shop.delivery_time,
@@ -31,8 +31,8 @@ class DeliveriesDatatable
         delivery.eta.to_formatted_s(:short),
         format_status(delivery.status),
         '<div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
-              <a class="blue" href="#"><i class="icon-zoom-in bigger-130"></i></a>
-              <a class="green edit-item" href="#modal-form-edit-item" role="button" data-toggle="modal"><i class="icon-pencil bigger-130"></i></a>
+              <a class="blue" href="deliveries/'+delivery.id.to_s+'"><i class="icon-zoom-in bigger-130"></i></a>
+              <a class="green edit-item" href="deliveries/'+delivery.id.to_s+'" role="button" data-toggle="modal"><i class="icon-pencil bigger-130"></i></a>
               <a class="red delete-item" href="#"><i class="icon-trash bigger-130"></i></a>
             </div>
             <div class="visible-xs visible-sm hidden-md hidden-lg">

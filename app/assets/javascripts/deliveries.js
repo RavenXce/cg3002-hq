@@ -27,9 +27,6 @@ $(document).on('ready page:load', function() {
 		},
 		fnDrawCallback : function() {// Injection to modify DOM
 			$('[data-rel=tooltip]').tooltip();
-			$('.edit-delivery').on(ace.click_event, function() {
-				//$('#modal-form-edit-item').load('/products/' + $(this).parents('tr').data('id') + '/edit');
-			});
 			$('.delete-delivery').on(ace.click_event, function(e) {
 				e.preventDefault();
 				$row = $(this).parents('tr');
