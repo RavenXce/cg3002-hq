@@ -77,8 +77,7 @@
 						class="active open"<%end%>>
 							<a href="#" class="dropdown-toggle"> <i class="icon-usd"></i> <span class="menu-text"> Sales </span> <b class="arrow icon-angle-down"></b> </a>
 							<ul class="submenu">
-								<li <% if current_page?(:controller=>'sales', :action=>
-									'index') %>
+								<li <% if current_page?(:controller=>'sales', :action=> 'index') %>
 									class="active"<%end%>>
 									<a href="<%= sales_path%>"> <i class="icon-double-angle-right"></i> Overview </a>
 								</li>
@@ -96,8 +95,22 @@
 							class="active"<%end%>> <a href="<%= deliveries_path%>"> <i class="icon-plane"></i> <span class="menu-text"> Deliveries </span> </a>
 						</li>
 						<li
-						<% if current_page?(:controller=>'items') %>
-							class="active"<%end%>> <a href="<%= items_path%>"> <i class="icon-th"></i> <span class="menu-text"> Products </span> </a>
+						<% if current_page?(:controller=>'items') || current_page?(:controller=>'shop_items') %>
+							class="active"<%end%>>
+							<a href="#" class="dropdown-toggle"> <i class="icon-usd"></i> <span class="menu-text"> Products </span> <b class="arrow icon-angle-down"></b> </a>
+							<ul class="submenu">
+								<li <% if current_page?(:controller=>'items', :action=> 'index') %>
+									class="active"<%end%>>
+									<a href="<%= items_path%>"> <i class="icon-double-angle-right"></i> Full Inventory </a>
+								</li>
+								<li <% if current_page?(:controller=>'shop_items', :action=> 'index') %>
+								class="active"<%end%>>
+									<a href="<%= shop_items_path %>"> <i class="icon-double-angle-right"></i> By Store </a>
+								</li>
+								<li>
+									<a href=<%= products_stats_path %>> <i class="icon-double-angle-right"></i> Statistics &amp; Analysis</a>
+								</li>
+							</ul>
 						</li>
 						<li>
 							<a href="calendar"> <i class="icon-calendar"></i> <span class="menu-text"> Calendar </span> </a>

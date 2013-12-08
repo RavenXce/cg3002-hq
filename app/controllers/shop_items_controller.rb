@@ -1,5 +1,9 @@
 class ShopItemsController < ApplicationController
   
+  def index
+    
+  end
+  
   # TODO: enable all switch.
   # TODO: change shop id to a string (like barcode). length of 6! 
   def batch_add

@@ -18,7 +18,6 @@ private
 
   def data
     sales.map do |sale| #XXX: Move standardized HTML to client-side view through jQuery DOM injection!
-      puts sale.inspect
       [
         '<td class="center"><label>
               <input type="checkbox" class="ace" />

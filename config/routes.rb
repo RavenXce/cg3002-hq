@@ -1,6 +1,7 @@
 HqServer::Application.routes.draw do
   post 'admin/item_dump', to: 'admin#item_dump'
   post 'products/sync/:id', to: 'items#sync'
+  get 'products/stats', to: 'items#stats'
   post 'sales/transaction_dump', to: 'sales#transaction_dump'
   post 'sales/:id', to: 'sales#create'
   get 'sales', to: 'sales#index'
@@ -12,7 +13,7 @@ HqServer::Application.routes.draw do
   resources :sessions
   resources :items, :path => 'products'
   resources :shops, :path => 'stores'
-  #resources :shop_items
+  resources :shop_items, :path => 'store/products'
   #resources :sales
   resources :deliveries
   root 'sessions#new'

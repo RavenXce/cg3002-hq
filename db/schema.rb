@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131204074449) do
+ActiveRecord::Schema.define(version: 20131208114009) do
 
   create_table "admins", force: true do |t|
     t.string   "login_code"
@@ -84,6 +84,7 @@ ActiveRecord::Schema.define(version: 20131204074449) do
     t.integer  "shop_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.datetime "eta"
   end
 
   add_index "shop_deliveries", ["shop_id"], name: "index_shop_deliveries_on_shop_id", using: :btree
