@@ -18,6 +18,7 @@ HqServer::Application.routes.draw do
   resources :deliveries
   get 'deliveries/api', to: 'deliveries#api', as: 'delivery_api'
   post 'deliveries/:id/approve', to: 'deliveries#approve', as: 'delivery_approve'
+  post 'deliveries/:id/dispatch', to: 'deliveries#mark_dispatched', as: 'delivery_dispatch'
   root 'sessions#new'
   
   # The priority is based upon order of creation: first created -> highest priority.

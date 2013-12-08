@@ -18,7 +18,7 @@ class DeliveriesDatatable
   private
 
   def data
-    deliveries.map do |delivery| #XXX: Move standardized HTML to client-side view through jQuery DOM injection!
+    deliveries.map do |delivery| #XXX: Move standardized HTML to client-side view through jQuery DOM injection!      
       [
         '<td class="center"><label>
               <input type="checkbox" class="ace" />
@@ -32,7 +32,7 @@ class DeliveriesDatatable
         delivery[:eta].to_formatted_s(:short),
         format_status(delivery.status, true),
         '<div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">'+
-              format_action(delivery.id, delivery.status)+              
+              format_action(delivery.id, delivery.status) +              
               '<a class="blue edit-item" href="deliveries/'+delivery.id.to_s+'" role="button" data-toggle="modal"><i class="icon-pencil bigger-130"></i></a>
               <a class="red delete-item" href="#"><i class="icon-trash bigger-130"></i></a>
             </div>
@@ -86,18 +86,6 @@ class DeliveriesDatatable
 
   def sort_direction
     params[:sSortDir_0] == "desc" ? "desc" : "asc"
-  end
-  
-  def format_action id, status
-    case status
-    when "pending"
-      string = '<a class="green" href="deliveries/'+id.to_s+'/approve"><i class="icon-ok bigger-130"></i></a>'
-    when "approved"
-      string = '<a class="green" href="deliveries/'+id.to_s+'/dispatch"><i class="icon-share-alt bigger-130"></i></a>'
-    else
-      string = ''
-    end
-    string
   end
   
 end

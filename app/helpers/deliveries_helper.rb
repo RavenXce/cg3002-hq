@@ -5,13 +5,29 @@ module DeliveriesHelper
     case status
     when "pending"
       string +='label-warning arrowed">'
+    when "approved"
+      string +='label-info arrowed-in">'
+    when "dispatched"
+      string +='label-success arrowed-right">'
     when "delayed"
-      string +='label-success arrowed">'
+      string +='label-danger arrowed-in arrowed-in-right">'
     when "delivered"
-      string +='label-success">'
+      string +='label-inverse">'
     else
-      string += '">'
+      string += 'label-info">'
     end
     string += status.humanize + '</span>'
+  end
+  
+  def format_action id, status
+    case status
+    when "pending"
+      string = '<a class="green" href="deliveries/'+id.to_s+'/approve" rel="nofollow" data-method="post"><i class="icon-ok bigger-130"></i></a>'
+    when "approved"
+      string = '<a class="green" href="deliveries/'+id.to_s+'/dispatch" rel="nofollow" data-method="post"><i class="icon-share-alt bigger-130"></i></a>'
+    else
+      string = ''
+    end
+    string
   end
 end
