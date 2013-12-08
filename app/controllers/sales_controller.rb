@@ -1,4 +1,5 @@
 class SalesController < ApplicationController
+  skip_before_action :authenticate_user, only: [:create]
   skip_before_action :verify_authenticity_token, only: [:create]
   before_filter :get_shops, except: [:create]
   def index

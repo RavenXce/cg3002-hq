@@ -1,4 +1,5 @@
 class ItemsController < ApplicationController
+  skip_before_action :authenticate_user, only: [:sync]
   skip_before_action :verify_authenticity_token, only: [:sync]
   layout false, :only => [:edit]
   
