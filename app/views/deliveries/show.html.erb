@@ -1,5 +1,36 @@
 <%
  @page_header = "Deliveries"
-  @page_sub_header = "items"
-  @breadcrumbs = [["Deliveries",deliveries_path], 'Items']
+  @page_sub_header = "details"
+  @breadcrumbs = [["Deliveries",deliveries_path], 'Details']
 %>
+<div class="widget-box">
+	<div class="widget-header header-color-dark">
+		<h5>Delivery Information</h5>
+		<div class="widget-toolbar">
+			<%= raw format_status @delivery.status %>
+		</div>
+	</div>
+	<div class="widget-body">
+		<div class="widget-main padding-6">
+			<strong>Destination Address:</strong> <%= @delivery.shop.country%>, <%= @delivery.shop.address%><br/>
+			<strong>Normal Delivery Travel Time:</strong> <%= @delivery.shop.delivery_time%></br>
+			<strong>Estimated Time of Arrival:</strong> <%= @delivery.eta != nil ? @delivery.eta : 'Not yet dispatched' %></br>
+			<div class="alert alert-info">
+				Additional Notes				
+			</div>
+			<button class="btn btn-app btn-success btn-sm">
+				<i class="icon-share-alt bigger-200"></i>
+				Dispatch</br>Delivery
+			</button>
+		</div>
+	</div>
+</div>
+
+<br/>
+
+<div class="container">
+	<div class="row delivery-items-table">
+		<table id="grid-table"></table>
+		<div id="grid-pager"></div>
+	</div>
+</div>

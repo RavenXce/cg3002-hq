@@ -1,4 +1,5 @@
 class DeliveriesDatatable
+  include DeliveriesHelper
   delegate :params, :link_to, :number_to_currency, to: :@view
 
   def initialize(view)
@@ -29,10 +30,10 @@ class DeliveriesDatatable
         delivery.shop.delivery_time,
         delivery.eta.nil? ? nil : 
         delivery.eta.to_formatted_s(:short),
-        format_status(delivery.status),
-        '<div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
-              <a class="blue" href="deliveries/'+delivery.id.to_s+'"><i class="icon-zoom-in bigger-130"></i></a>
-              <a class="green edit-item" href="deliveries/'+delivery.id.to_s+'" role="button" data-toggle="modal"><i class="icon-pencil bigger-130"></i></a>
+        format_status(delivery.status, true),
+        '<div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">'+
+              format_action(delivery.id, delivery.status)+              
+              '<a class="blue edit-item" href="deliveries/'+delivery.id.to_s+'" role="button" data-toggle="modal"><i class="icon-pencil bigger-130"></i></a>
               <a class="red delete-item" href="#"><i class="icon-trash bigger-130"></i></a>
             </div>
             <div class="visible-xs visible-sm hidden-md hidden-lg">
@@ -86,17 +87,17 @@ class DeliveriesDatatable
   def sort_direction
     params[:sSortDir_0] == "desc" ? "desc" : "asc"
   end
-
-  def format_status status
-    string = ""
+  
+  def format_action id, status
     case status
     when "pending"
-      string +='<span class="label label-sm label-warning arrowed">'
-    when "delayed"
-      string +='<span class="label label-sm label-success arrowed">'
-    when "delivered"
-      string +='<span class="label label-sm label-success">'
+      string = '<a class="green" href="deliveries/'+id.to_s+'/approve"><i class="icon-ok bigger-130"></i></a>'
+    when "approved"
+      string = '<a class="green" href="deliveries/'+id.to_s+'/dispatch"><i class="icon-share-alt bigger-130"></i></a>'
+    else
+      string = ''
     end
-    string += status + '</span>'
+    string
   end
+  
 end

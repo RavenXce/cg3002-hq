@@ -8,6 +8,6 @@ class Shop < ActiveRecord::Base
   validates :s_id, :country, :address, :postal_code, presence: true
   
   def delivery_time
-    read_attribute(:delivery_time).strftime("%H:%M")
+    read_attribute(:delivery_time).strftime("%H Hours %M Mins")
   end
 end
