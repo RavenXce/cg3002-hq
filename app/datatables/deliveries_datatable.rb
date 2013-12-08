@@ -28,8 +28,8 @@ class DeliveriesDatatable
         '<a href="#">'+ "%05d" % delivery.shop.s_id.to_s+'</a>', #TODO: link to shop products/stats page
         delivery.shop.country,
         delivery.shop.delivery_time,
-        delivery.eta.nil? ? nil : 
-        delivery.eta.to_formatted_s(:short),
+        delivery[:eta].nil? ? nil : 
+        delivery[:eta].to_formatted_s(:short),
         format_status(delivery.status, true),
         '<div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">'+
               format_action(delivery.id, delivery.status)+              

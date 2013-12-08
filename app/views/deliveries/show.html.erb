@@ -12,16 +12,39 @@
 	</div>
 	<div class="widget-body">
 		<div class="widget-main padding-6">
-			<strong>Destination Address:</strong> <%= @delivery.shop.country%>, <%= @delivery.shop.address%><br/>
-			<strong>Normal Delivery Travel Time:</strong> <%= @delivery.shop.delivery_time%></br>
-			<strong>Estimated Time of Arrival:</strong> <%= @delivery.eta != nil ? @delivery.eta : 'Not yet dispatched' %></br>
-			<div class="alert alert-info">
-				Additional Notes				
+			<div class="row">
+				<div class="col-lg-11">
+					<div class="well well-sm">
+						<strong>Destination Address:</strong> <%= @delivery.shop.country%>, <%= @delivery.shop.address%><br/>
+						<strong>Typical Delivery Travel Time:</strong> <%= @delivery.shop.delivery_time%></br>
+						<strong>Dispatch Time:</strong> <%= @delivery.eta != nil ? @delivery.eta : 'Not yet dispatched' %></br>
+						<strong>Estimated Time of Arrival:</strong> <%= @delivery.eta != nil ? @delivery.eta : 'Not yet dispatched' %> EDIT</br>
+					</div>
+					<div class="well well-sm">
+						Additional Notes		
+					</div>
+				</div>
+				<div class="col-lg-1">
+					<div class="row pad-top">	
+						<% if @delivery.status == "pending" then %>
+						<button class="btn btn-app btn-success btn-xs radius-4">
+							<i class="icon-share-alt bigger-150"></i>
+							 Approve</br>Delivery 
+						</button>
+						<% elsif @delivery.status == "approved" then %>
+						<button class="btn btn-app btn-grey btn-xs radius-4">
+							<i class="icon-share-alt bigger-150"></i>
+							 Dispatch</br>Delivery 
+						</button>
+						<% end %>
+					</div>
+					<div class="row">
+						<% if @delivery.status != "delivered" then %>
+						<button class="btn btn-app btn-xs btn-danger radius-4">Reject</button>
+						<% end %>
+					</div>
+				</div>
 			</div>
-			<button class="btn btn-app btn-success btn-sm">
-				<i class="icon-share-alt bigger-200"></i>
-				Dispatch</br>Delivery
-			</button>
 		</div>
 	</div>
 </div>
