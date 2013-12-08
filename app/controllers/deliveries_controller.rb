@@ -1,4 +1,7 @@
 class DeliveriesController < ApplicationController
+  skip_before_action :authenticate_user, only: [:api]
+  skip_before_action :verify_authenticity_token, only: [:api]
+  
   def index
     respond_to do |format|
       format.html { @deliveries = ShopDelivery.all }
@@ -43,4 +46,32 @@ class DeliveriesController < ApplicationController
     end
   end
   
+  def approve
+    @delivery = ShopDelivery.find(params[:id])
+    @delivery.status = 'approved'
+    @delivery.save
+    flash.notice = 'Approved the delivery.'
+    redirect_to(:back) 
+  end
+  
+  def mark_dispatched
+    @delivery = ShopDelivery.find(params[:id])
+    @delivery.status = 'dispatched'
+    @delivery.eta = DateTime.now + @delivery.shop.delivery_time[0..1].to_i.hours + @delivery.shop.delivery_time[3..4].to_i.hours
+    @delivery.save
+    flash.notice = 'Delivery marked as on the way.'
+    redirect_to(:back) 
+  end
+  
+  def destroy
+    @delivery = ShopDelivery.find(params[:id])
+    @delivery.destroy
+    flash.notice = 'Delivery removed.'
+    redirect_to deliveries_path
+  end
+  
+  def api
+    
+  end
+   
 end

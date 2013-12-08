@@ -27,20 +27,20 @@
 				<div class="col-lg-1">
 					<div class="row pad-top">	
 						<% if @delivery.status == "pending" then %>
-						<button class="btn btn-app btn-success btn-xs radius-4">
-							<i class="icon-share-alt bigger-150"></i>
-							 Approve</br>Delivery 
-						</button>
+							<%= button_to [:delivery_approve, @deliveries], :class=>'btn btn-app btn-success btn-xs radius-4' do %>
+								<i class="icon-share-alt bigger-150"></i>
+							 	Approve</br>Delivery 
+							<%end%>
 						<% elsif @delivery.status == "approved" then %>
-						<button class="btn btn-app btn-grey btn-xs radius-4">
-							<i class="icon-share-alt bigger-150"></i>
-							 Dispatch</br>Delivery 
-						</button>
+							<%= button_to [:delivery_dispatch, @deliveries], :class=>'btn btn-app btn-grey btn-xs radius-4' do %>
+								<i class="icon-share-alt bigger-150"></i>
+								 Dispatch</br>Delivery 
+							<%end%>
 						<% end %>
 					</div>
 					<div class="row">
-						<% if @delivery.status != "delivered" then %>
-						<button class="btn btn-app btn-xs btn-danger radius-4">Reject</button>
+						<% if @delivery.status != "delivered" then %>						
+							<%= button_to 'Reject', delivery_path, :method => :delete, :data => { confirm: 'Reject this delivery?'}, :class=>'btn btn-app btn-xs btn-danger radius-4"' %>
 						<% end %>
 					</div>
 				</div>

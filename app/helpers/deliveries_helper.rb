@@ -9,6 +9,8 @@ module DeliveriesHelper
       string +='label-success arrowed">'
     when "delivered"
       string +='label-success">'
+    else
+      string += '">'
     end
     string += status.humanize + '</span>'
   end
