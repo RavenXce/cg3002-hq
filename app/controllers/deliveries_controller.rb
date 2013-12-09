@@ -1,4 +1,5 @@
 class DeliveriesController < ApplicationController
+  include DeliveriesHelper
   skip_before_action :authenticate_user, only: [:api, :mark_dispatched]
   skip_before_action :verify_authenticity_token, only: [:mark_dispatched]
   
@@ -36,7 +37,7 @@ class DeliveriesController < ApplicationController
         result = {:page => page, :total => total_pages, :records => total_items}
         rows = []
         items.each do |item|
-          rows << {:id => item.id, :cell => item.to_cell}
+          rows << {:id => item.id, :cell => to_cell(item)}
         end
         result[:rows] = rows
         render json: result
@@ -83,7 +84,7 @@ class DeliveriesController < ApplicationController
     shop = Shop.find(params[:id])
     shop_deliveries = shop.shop_deliveries.includes(:shop_delivery_items).where("status != 'delivered'")
     render :json => {:success => true, :shop_items => shop_deliveries.as_json(
-      :only => [:status,:dispatched_at,:eta],
+      :only => [:status,:dispatched_at,:expected_at],
       :include => {:shop_delivery_items => { :only => [:quantity], :methods => [:barcode]}}
       )}, status: :ok
   end

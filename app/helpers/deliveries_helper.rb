@@ -1,4 +1,5 @@
 module DeliveriesHelper
+  include ActionView::Helpers::NumberHelper
   def format_status status, small = false
     string = '<span class="label '
     string += small ? 'label-sm ' : ''
@@ -30,4 +31,10 @@ module DeliveriesHelper
     end
     string
   end
+    
+  def to_cell delivery_item
+    item = delivery_item.item
+    ['', item.barcode, item.product_name, item.manufacturer, item.category, 
+     number_to_currency(item.cost_price), delivery_item.quantity]
+  end  
 end
