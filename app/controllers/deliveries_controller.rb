@@ -1,5 +1,6 @@
 class DeliveriesController < ApplicationController
-  skip_before_action :authenticate_user, only: [:api]
+  skip_before_action :authenticate_user, only: [:api, :mark_dispatched]
+  skip_before_action :verify_authenticity_token, only: [:mark_dispatched]
   
   def index
     respond_to do |format|
@@ -63,6 +64,14 @@ class DeliveriesController < ApplicationController
     redirect_to(:back) 
   end
   
+  def mark_delivered
+    @delivery = ShopDelivery.find(params[:id])
+    render :json => {:errors => 'Invalid delivery ID.'}, :status => 422 and return if @delivery.nil?
+    @delivery.status = 'delivered'
+    @delivery.save
+    render :json => {:success => true}, :status => 200
+  end
+  
   def destroy
     @delivery = ShopDelivery.find(params[:id])
     @delivery.destroy
@@ -72,7 +81,7 @@ class DeliveriesController < ApplicationController
   
   def api
     shop = Shop.find(params[:id])
-    shop_deliveries = shop.shop_deliveries.includes(:shop_delivery_items).all
+    shop_deliveries = shop.shop_deliveries.includes(:shop_delivery_items).where("status != 'delivered'")
     render :json => {:success => true, :shop_items => shop_deliveries.as_json(
       :only => [:status,:dispatched_at,:eta],
       :include => {:shop_delivery_items => { :only => [:quantity], :methods => [:barcode]}}

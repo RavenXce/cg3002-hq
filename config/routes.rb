@@ -20,6 +20,7 @@ HqServer::Application.routes.draw do
   get 'deliveries/:id/api', to: 'deliveries#api', as: 'delivery_api'
   post 'deliveries/:id/approve', to: 'deliveries#approve', as: 'delivery_approve'
   post 'deliveries/:id/dispatch', to: 'deliveries#mark_dispatched', as: 'delivery_dispatch'
+  post 'deliveries/:id/received', to: 'deliveries#mark_delivered', as: 'delivery_received'
   post 'deliveries/:delivery_id/edit_delivery_item', to: 'delivery_items#edit'
   root 'sessions#new'
   
