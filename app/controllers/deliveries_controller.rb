@@ -59,7 +59,7 @@ class DeliveriesController < ApplicationController
     @delivery = ShopDelivery.find(params[:id])
     @delivery.status = 'dispatched'
     @delivery.dispatched_at = DateTime.now 
-    @delivery.eta = DateTime.now + @delivery.shop.delivery_time[0..1].to_i.hours + @delivery.shop.delivery_time[3..4].to_i.minutes
+    @delivery.eta = DateTime.now + @delivery.shop.delivery_time[0..1].to_i.hours + @delivery.shop.delivery_time[9..10].to_i.minutes
     @delivery.save
     flash.notice = 'Delivery marked as on the way'
     redirect_to(:back) 
