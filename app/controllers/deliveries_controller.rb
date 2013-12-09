@@ -84,7 +84,7 @@ class DeliveriesController < ApplicationController
     shop = Shop.find(params[:id])
     shop_deliveries = shop.shop_deliveries.includes(:shop_delivery_items).where("status != 'delivered'")
     render :json => {:success => true, :shop_items => shop_deliveries.as_json(
-      :only => [:status,:dispatched_at,:expected_at],
+      :only => [:status,:dispatched_at], :methods => [:expected_at],
       :include => {:shop_delivery_items => { :only => [:quantity], :methods => [:barcode]}}
       )}, status: :ok
   end
