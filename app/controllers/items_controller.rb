@@ -28,6 +28,7 @@ class ItemsController < ApplicationController
         if !db_item.nil? then
           db_item.current_stock = shop_item[:current_stock]
           db_item.updated_at = DateTime.now
+          db_item = active_pricing db_item
           updated_items << db_item
         end
       end
@@ -63,6 +64,18 @@ class ItemsController < ApplicationController
 
   def create_params
     params.permit(:barcode, :product_name, :manufacturer, :category, :cost_price, :bundle_unit, :minimum_stock)
+  end
+  
+  #TODO: allow constants to be adjustede by admin in settings
+  BASE_PROFIT_RATIO = 0.75
+  MINIMUM_PROFIT_RATIO = 0.50
+  SALES_PROFIT_RATIO = 2.00
+  
+  def active_pricing (shop_item)
+    base_profit = shop_item.item.cost_price * BASE_PROFIT_RATIO
+    adjusted_profit = base_profit * (MINIMUM_PROFIT_RATIO + ((shop_item.current_stock / shop_item.item.minimum_stock) * SALES_PROFIT_RATIO))
+    shop_item.selling_price = adjusted_profit + shop_item.item.cost_price
+    shop_item
   end
   
 end

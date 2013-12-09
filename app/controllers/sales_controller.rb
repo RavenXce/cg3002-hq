@@ -8,16 +8,12 @@ class SalesController < ApplicationController
   def create
     #begin
       shop = Shop.find_by_s_id(params[:id])
-      params.require(:sales)
-      sales = []
-      updated_items = []
-      params[:sales].each do |sale|
-        shop_item = shop.shop_items.includes(:item).where('items.barcode' => sale[:barcode]).first
-        updated_items << active_pricing(shop_item, sale[:quantity])
-        sales << Sale.new(:count => sale[:quantity], :price => sale[:price], :date => sale[:date], :shop_id => shop.id, :item_id => shop_item.item_id)
+      sales = []      
+      !params[:sales].nil? && params[:sales].each do |sale|
+        item = Item.find_by_barcode(sale[:barcode])
+        sales << Sale.new(:count => sale[:quantity], :price => sale[:price], :date => sale[:date], :shop_id => shop.id, :item_id => item.id)
       end
       Sale.import sales
-      ShopItem.import updated_items
     #rescue
     #  render :json => {:success => false}, status: 422
     #else
@@ -73,18 +69,6 @@ class SalesController < ApplicationController
 
   def get_shops
     @shops = Shop.all
-  end
-  
-  #TODO: allow constants to be adjustede by admin in settings
-  BASE_PROFIT_RATIO = 0.75
-  MINIMUM_PROFIT_RATIO = 0.50
-  SALES_PROFIT_RATIO = 2.00
-  
-  def active_pricing (shop_item, sales)
-    base_profit = shop_item.item.cost_price * BASE_PROFIT_RATIO
-    adjusted_profit = base_profit * (MINIMUM_PROFIT_RATIO + ((sales.to_f / shop_item.item.minimum_stock) * SALES_PROFIT_RATIO))
-    shop_item.selling_price = adjusted_profit + shop_item.item.cost_price
-    shop_item
   end
 
 end
