@@ -21,7 +21,6 @@ class ItemsController < ApplicationController
   end
 
   def sync
-      params.require(:shop_items)
       shop = Shop.find_by_s_id(params[:id])
       updated_items = []
       params[:shop_items].each do |shop_item|
