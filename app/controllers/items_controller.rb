@@ -23,7 +23,7 @@ class ItemsController < ApplicationController
   def sync
       shop = Shop.find_by_s_id(params[:id])
       updated_items = []
-      params[:shop_items].nil? && params[:shop_items].each do |shop_item|
+      !params[:shop_items].nil? && params[:shop_items].each do |shop_item|
         db_item = shop.shop_items.includes(:item).where("items.barcode" => shop_item[:barcode]).first
         if !db_item.nil? then
           db_item.current_stock = shop_item[:current_stock]
