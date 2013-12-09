@@ -23,7 +23,7 @@ class ItemsController < ApplicationController
   def sync
       shop = Shop.find_by_s_id(params[:id])
       updated_items = []
-      params[:shop_items].each do |shop_item|
+      params[:shop_items].nil? && params[:shop_items].each do |shop_item|
         db_item = shop.shop_items.includes(:item).where("items.barcode" => shop_item[:barcode]).first
         if !db_item.nil? then
           db_item.current_stock = shop_item[:current_stock]
@@ -32,8 +32,8 @@ class ItemsController < ApplicationController
         end
       end
       ShopItem.import updated_items, :on_duplicate_key_update => [ :current_stock, :updated_at ]
-      updated_items = shop.shop_items.includes(:item).all
-      render :json => {:success => true, :shop_items => updated_items.as_json(
+      all_items = shop.shop_items.includes(:item).all
+      render :json => {:success => true, :shop_items => all_items.as_json(
         :only => [:current_stock, :selling_price],
         :include => {:item => { :except => [:created_at, :updated_at, :deleted_at, :id]}}
         )}, status: :ok
