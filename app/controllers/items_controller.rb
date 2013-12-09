@@ -23,16 +23,26 @@ class ItemsController < ApplicationController
   def sync
       shop = Shop.find_by_s_id(params[:id])
       updated_items = []
+      delivery = ShopDelivery.new(:shop_id => shop.id, :status => "pending")
+      delivery_items = []
       !params[:shop_items].nil? && params[:shop_items].each do |shop_item|
         db_item = shop.shop_items.includes(:item).where("items.barcode" => shop_item[:barcode]).first
         if !db_item.nil? then
           db_item.current_stock = shop_item[:current_stock]
           db_item.updated_at = DateTime.now
           db_item = active_pricing db_item
+          deficit = db_item.item.minimum_stock - db_item.current_stock
+          if deficit > 0 then 
+            delivery_items << delivery.shop_delivery_items.new(:item_id => db_item.id, :quantity => deficit)
+          end
           updated_items << db_item
         end
       end
       ShopItem.import updated_items, :on_duplicate_key_update => [ :current_stock, :updated_at ]
+      if !delivery_items.empty? then
+        delivery.save
+        ShopDeliveryItem.import delivery_items
+      end
       all_items = shop.shop_items.includes(:item).all
       render :json => {:success => true, :shop_items => all_items.as_json(
         :only => [:current_stock, :selling_price],
