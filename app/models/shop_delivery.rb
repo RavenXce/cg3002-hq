@@ -15,6 +15,10 @@ class ShopDelivery < ActiveRecord::Base
     end
   end
   
+  def expected_at
+    self[:eta]
+  end
+  
   def dispatch_time
     if status == "pending"
       'Still processing shipment'
