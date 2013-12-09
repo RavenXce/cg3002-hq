@@ -1,6 +1,6 @@
 class ShopDelivery < ActiveRecord::Base
-  belongs_to :shop, :inverse_of => :shop_deliveries, :dependent => :destroy
-  has_many :shop_delivery_items, :inverse_of => :shop_delivery
+  belongs_to :shop, :inverse_of => :shop_deliveries
+  has_many :shop_delivery_items, :inverse_of => :shop_delivery, :dependent => :destroy
   has_many :items, through: :shop_delivery_items
   
   def eta

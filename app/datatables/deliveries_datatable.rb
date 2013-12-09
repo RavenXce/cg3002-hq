@@ -28,13 +28,13 @@ class DeliveriesDatatable
         '<a href="#">'+ "%05d" % delivery.shop.s_id.to_s+'</a>', #TODO: link to shop products/stats page
         delivery.shop.country,
         delivery.shop.delivery_time,
-        delivery[:eta].nil? ? nil : 
+        delivery[:eta].nil? ? 'Unknown' : 
         delivery[:eta].to_formatted_s(:short),
         format_status(delivery.status, true),
         '<div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">'+
               format_action(delivery.id, delivery.status) +              
               '<a class="blue edit-item" href="deliveries/'+delivery.id.to_s+'" role="button" data-toggle="modal"><i class="icon-pencil bigger-130"></i></a>
-              <a class="red delete-item" href="#"><i class="icon-trash bigger-130"></i></a>
+              <a class="red delete-item" href="deliveries/'+delivery.id.to_s+'" rel="nofollow" data-method="delete" data-confirm="Delete forever?"><i class="icon-trash bigger-130"></i></a>
             </div>
             <div class="visible-xs visible-sm hidden-md hidden-lg">
               <div class="inline position-relative">

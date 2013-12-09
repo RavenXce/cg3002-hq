@@ -17,8 +17,8 @@
 					<div class="well well-sm">
 						<strong>Destination Address:</strong> <%= @delivery.shop.country%>, <%= @delivery.shop.address%><br/>
 						<strong>Typical Delivery Travel Time:</strong> <%= @delivery.shop.delivery_time%></br>
-						<strong>Dispatch Time:</strong> <%= @delivery.eta != nil ? @delivery.eta : 'Not yet dispatched' %></br>
-						<strong>Estimated Time of Arrival:</strong> <%= @delivery.eta != nil ? @delivery.eta : 'Not yet dispatched' %> EDIT</br>
+						<strong>Dispatch Time:</strong> <%= @delivery.dispatch_time != nil ? @delivery.dispatch_time : 'Not yet dispatched' %></br>
+						<strong>Estimated Time of Arrival:</strong> <%= @delivery.eta != nil ? @delivery.eta : 'Not yet known' %> EDIT</br>
 					</div>
 					<div class="well well-sm">
 						Additional Notes		

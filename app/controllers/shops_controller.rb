@@ -11,8 +11,10 @@ class ShopsController < ApplicationController
       shop.save!
     rescue => e
       flash.alert = e.message
+    else
+      flash.notice = 'New shop created successfully'
     end
-    redirect_to :index
+    redirect_to :action => :index
   end
 
   def destroy
@@ -20,7 +22,7 @@ class ShopsController < ApplicationController
     begin
       shop.delete #TODO: do a soft delete instead
     rescue => e
-      render :json => {:success => false, :errors => [e.message]}, :status => 422
+      render :json => {:success => false, :errors => [e.message]}, :status => 422      
     end
     render :json => {:success => true}, :status => 200
   end
@@ -31,9 +33,15 @@ class ShopsController < ApplicationController
   end
 
   def update
-    shop = Shop.find(params[:id])
-    shop.update(edit_params)
-    redirect_to :index
+    begin
+      shop = Shop.find(params[:id])
+      shop.update(edit_params)
+    rescue => e
+      flash.alert = e.message
+    else
+      flash.notice = 'Shop details updated successfully'
+    end
+    redirect_to :action => :index
   end
   
   private
