@@ -1,7 +1,7 @@
 class DeliveriesController < ApplicationController
   include DeliveriesHelper
-  skip_before_action :authenticate_user, only: [:api, :mark_dispatched]
-  skip_before_action :verify_authenticity_token, only: [:mark_dispatched]
+  skip_before_action :authenticate_user, only: [:api, :mark_delivered]
+  skip_before_action :verify_authenticity_token, only: [:mark_delivered]
   
   def index
     respond_to do |format|
@@ -67,7 +67,9 @@ class DeliveriesController < ApplicationController
   
   def mark_delivered
     @delivery = ShopDelivery.find(params[:id])
-    render :json => {:errors => 'Invalid delivery ID.'}, :status => 422 and return if @delivery.nil?
+    if @delivery.nil?
+      render :json => {:errors => 'Invalid delivery ID.'}, :status => 422 and return
+    end
     @delivery.status = 'delivered'
     @delivery.save
     render :json => {:success => true}, :status => 200
