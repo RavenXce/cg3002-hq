@@ -1,6 +1,5 @@
 class DeliveriesController < ApplicationController
   skip_before_action :authenticate_user, only: [:api]
-  skip_before_action :verify_authenticity_token, only: [:api]
   
   def index
     respond_to do |format|
@@ -72,7 +71,16 @@ class DeliveriesController < ApplicationController
   end
   
   def api
-    
+    shop = Shop.find(params[:id])
+    shop_deliveries = shop.shop_deliveries.includes(:shop_delivery_items).all
+    render :json => {:success => true, :shop_items => shop_deliveries.as_json(
+      :only => [:status,:dispatched_at,:eta],
+      :include => {:shop_delivery_items => { :only => [:quantity], :methods => [:barcode]}}
+      )}, status: :ok
   end
-   
+  
+  def edit
+    # TODO: allow update ETA  
+  end
+  
 end

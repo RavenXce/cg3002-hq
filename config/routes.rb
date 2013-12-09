@@ -4,11 +4,12 @@ HqServer::Application.routes.draw do
   post 'admin/item_dump', to: 'admins#item_dump'
   resources :sessions
   resources :items, :path => 'products'
-  post 'products/sync/:id', to: 'items#sync'
+  post 'products/sync/:id', to: 'items#sync' # for API
   get 'products/stats', to: 'items#stats'
   resources :shops, :path => 'stores'
   resources :shop_items, :path => 'store/products'
   post 'shop_items/batch_add', to: 'shop_items#batch_add'
+  # XXX: make this RESTful
   #resources :sales
   get 'sales', to: 'sales#index'
   get 'sales/all', to: 'sales#all'
@@ -16,9 +17,10 @@ HqServer::Application.routes.draw do
   post 'sales/transaction_dump', to: 'sales#transaction_dump'
   post 'sales/:id', to: 'sales#create'
   resources :deliveries
-  get 'deliveries/api', to: 'deliveries#api', as: 'delivery_api'
+  get 'deliveries/:id/api', to: 'deliveries#api', as: 'delivery_api'
   post 'deliveries/:id/approve', to: 'deliveries#approve', as: 'delivery_approve'
   post 'deliveries/:id/dispatch', to: 'deliveries#mark_dispatched', as: 'delivery_dispatch'
+  post 'deliveries/:delivery_id/edit_delivery_item', to: 'delivery_items#edit'
   root 'sessions#new'
   
   # The priority is based upon order of creation: first created -> highest priority.

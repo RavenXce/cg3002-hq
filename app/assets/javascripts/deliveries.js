@@ -1,5 +1,5 @@
 $(document).on('ready page:load', function() {
-	var allProductsTable = $('#all-deliveries-table').dataTable({
+	var allDeliveryItemsTable = $('#all-deliveries-table').dataTable({
 		sPaginationType : "bootstrap",
 		bJQueryUI : false,
 		bProcessing : true,
@@ -44,7 +44,7 @@ $(document).on('ready page:load', function() {
 										authenticity_token : AUTH_TOKEN
 									},
 									success : function(result) {
-										allProductsTable.fnDraw();
+										allDeliveryItemsTable.fnDraw();
 									},
 									error : function(jqXHR, status, error) {
 									}
@@ -63,9 +63,11 @@ $(document).on('ready page:load', function() {
 });
 
 jQuery(function($) {
+	var path = window.location.pathname;
+	var delivery_id = path.substr( path.lastIndexOf("/") + 1 );
 	var grid_selector = "#grid-table";
 	var pager_selector = "#grid-pager";
-	grid = jQuery(grid_selector).jqGrid({
+	grid = $(grid_selector).jqGrid({
 		url: document.URL+'.json',
 		datatype: "json",
 		height: 150,
@@ -81,7 +83,7 @@ jQuery(function($) {
 					//editformbutton:true, editOptions:{recreateForm: true, beforeShowForm:beforeEditCallback}
 				}
 			},
-			{name:'items.barcode',index:'items.barcode', width:60, editable: false},
+			{name:'items.barcode',index:'items.barcode', width:60, editable: false, addable: true},
 			{name:'items.product_name',index:'items.product_name', width:200, editable: false},
 			{name:'items.manufacturer',index:'items.manufacturer', width:100, editable: false},
 			{name:'items.category',index:'items.category', width:100, editable: false},
@@ -109,23 +111,28 @@ jQuery(function($) {
 				enableTooltips(table);
 			}, 0);
 		},
-		editurl: 'deliveries/edit',
+		editurl: delivery_id+'/edit_delivery_item',
 		caption: "Item Listing",
 		autowidth: true
 	});
 	
-	function displayProcessing() {
-		$('.notice').html('Processing request..');
+	function displayProcessing() {	
+		$.gritter.add({
+			title : 'Warning',
+			text : 'Processing request..',
+			sticky: false,
+			class_name : 'gritter-warning'
+		});
 	}
 	
 	function displayMessage(response){
-		$('.notice').html(response.responseJSON.message);
-		var timeout;
-		clearTimeout(timeout);
-        timeout = setTimeout(function() {
-            $('.notice').html('');
-        }, 5000);
-        return true;
+		$.gritter.add({
+			title : 'Status',
+			text : response.responseJSON.message,
+			sticky: false,
+			class_name : 'gritter-success'
+		});
+		return true;
 	}
 
 	//enable search/filter toolbar
@@ -146,16 +153,21 @@ jQuery(function($) {
 		{ 	//navbar options
 			edit: true,
 			editicon : 'icon-pencil blue',
+			edittitle: "Edit selected item",
 			add: true,
 			addicon : 'icon-plus-sign purple',
+			addtitle: "Add new item",
 			del: true,
 			delicon : 'icon-trash red',
+			deltitle: "Delete selected item",
 			search: true,
 			searchicon : 'icon-search orange',
+			searchtitle: "Search items",
 			refresh: true,
 			refreshicon : 'icon-refresh green',
 			view: true,
 			viewicon : 'icon-zoom-in grey',
+			viewtitle: "View selected item",
 		},
 		{
 			//edit record form

@@ -23,8 +23,8 @@ $.extend($.jgrid,{
 		groupOps: [	{ op: "AND", text: "all" },	{ op: "OR",  text: "any" }	]
 	},
 	edit : {
-		addCaption: "Add Record",
-		editCaption: "Edit Record",
+		addCaption: "Add Item",
+		editCaption: "Edit Item",
 		bSubmit: "Submit",
 		bCancel: "Cancel",
 		bClose: "Close",

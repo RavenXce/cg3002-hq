@@ -7,4 +7,8 @@ class ShopDeliveryItem < ActiveRecord::Base
      self.item.cost_price, self.quantity]
   end
   
+  def barcode
+    self.item.barcode
+  end
+  
 end
