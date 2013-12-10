@@ -33,8 +33,8 @@ class DeliveriesDatatable
         format_status(delivery.status, true),
         '<div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">'+
               format_action(delivery.id, delivery.status) +              
-              '<a class="blue edit-item" href="deliveries/'+delivery.id.to_s+'" role="button" data-toggle="modal"><i class="icon-pencil bigger-130"></i></a>
-              <a class="red delete-item" href="deliveries/'+delivery.id.to_s+'" rel="nofollow" data-method="delete" data-confirm="Delete forever?"><i class="icon-trash bigger-130"></i></a>
+              '<a class="blue edit-item" href="'+delivery.id.to_s+'" role="button"><i class="icon-pencil bigger-130"></i></a>
+              <a class="red delete-item" href="'+delivery.id.to_s+'" rel="nofollow" data-method="delete" data-confirm="Delete forever?"><i class="icon-trash bigger-130"></i></a>
             </div>
             <div class="visible-xs visible-sm hidden-md hidden-lg">
               <div class="inline position-relative">
