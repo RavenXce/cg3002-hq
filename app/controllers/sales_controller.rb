@@ -36,6 +36,7 @@ class SalesController < ApplicationController
     return
     end
     # TODO: Do batch import
+    sales = []
     data_lines = params[:transactions].read.lines.map(&:chomp)
     data_lines.each do |transaction|
       tdetails = transaction.split(':')
@@ -48,10 +49,13 @@ class SalesController < ApplicationController
       sale = Sale.find_by_item_id_and_date(item.id, tdetails[5])
       if !sale.nil?
         sale.increment(:count, tdetails[4])
+        sale.save
       else
-        shop.sales.create(:price => item.cost_price, :date => tdetails[5], :count => tdetails[4], :item_id => item.id)
+        sale = shop.sales.new(:price => item.cost_price, :date => tdetails[5], :count => tdetails[4], :item_id => item.id)
+        sales << sale
       end
     end
+    Sale.import sales
   end
 
   def all
