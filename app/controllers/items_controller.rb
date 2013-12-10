@@ -30,7 +30,7 @@ class ItemsController < ApplicationController
         if !db_item.nil? then
           db_item.current_stock = shop_item[:current_stock]
           db_item.updated_at = DateTime.now
-          db_item = active_pricing db_item
+          db_item.selling_price = active_pricing db_item
           deficit = db_item.item.minimum_stock - db_item.current_stock
           if deficit > 0 then 
             delivery_items << delivery.shop_delivery_items.new(:item_id => db_item.id, :quantity => deficit)
@@ -81,9 +81,8 @@ class ItemsController < ApplicationController
   
   def active_pricing (shop_item)
     base_profit = shop_item.item.cost_price * BASE_PROFIT_RATIO
-    adjusted_profit = base_profit * ((shop_item.current_stock - shop_item.item.minimum_stock)/shop_item.item.minimum_stock)
-    shop_item.selling_price = adjusted_profit + shop_item.item.cost_price
-    shop_item
+    adjusted_profit = base_profit + (base_profit * ((shop_item.item.minimum_stock - shop_item.current_stock)/shop_item.item.minimum_stock.to_f))
+    selling_price = adjusted_profit + shop_item.item.cost_price
   end
   
 end
