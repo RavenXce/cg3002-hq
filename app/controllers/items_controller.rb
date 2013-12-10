@@ -77,13 +77,11 @@ class ItemsController < ApplicationController
   end
   
   #TODO: allow constants to be adjustede by admin in settings
-  BASE_PROFIT_RATIO = 0.75
-  MINIMUM_PROFIT_RATIO = 0.50
-  SALES_PROFIT_RATIO = 2.00
+  BASE_PROFIT_RATIO = 0.25
   
   def active_pricing (shop_item)
     base_profit = shop_item.item.cost_price * BASE_PROFIT_RATIO
-    adjusted_profit = base_profit * (MINIMUM_PROFIT_RATIO + ((shop_item.current_stock / shop_item.item.minimum_stock) * SALES_PROFIT_RATIO))
+    adjusted_profit = base_profit * ((shop_item.current_stock - shop_item.item.minimum_stock)/shop_item.item.minimum_stock)
     shop_item.selling_price = adjusted_profit + shop_item.item.cost_price
     shop_item
   end
