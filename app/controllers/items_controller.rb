@@ -38,7 +38,7 @@ class ItemsController < ApplicationController
           updated_items << db_item
         end
       end
-      ShopItem.import updated_items, :on_duplicate_key_update => [ :current_stock, :updated_at ]
+      ShopItem.import updated_items, :on_duplicate_key_update => [ :current_stock, :updated_at, :selling_price ]
       if !delivery_items.empty? then
         delivery.save
         ShopDeliveryItem.import delivery_items
