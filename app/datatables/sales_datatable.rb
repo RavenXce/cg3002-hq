@@ -56,7 +56,7 @@ private
   end
 
   def sort_column
-    columns = %w[sale.id date shops.s_id items.product_name items.barcode count price] #id is unsortable
+    columns = %w[id date shops.s_id items.product_name items.barcode count price] #id is unsortable
     columns[params[:iSortCol_0].to_i]
   end
 
